@@ -1,0 +1,12 @@
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\bin\Debug\net6.0\MapDat.Domain.deps.json
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\bin\Debug\net6.0\MapDat.Domain.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\bin\Debug\net6.0\MapDat.Domain.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.csproj.AssemblyReference.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.AssemblyInfoInputs.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.AssemblyInfo.cs
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.csproj.CoreCompileInputs.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\refint\MapDat.Domain.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\MapDat.Domain.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Domain\obj\Debug\net6.0\ref\MapDat.Domain.dll

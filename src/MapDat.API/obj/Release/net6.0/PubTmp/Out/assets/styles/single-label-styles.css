@@ -1,0 +1,144 @@
+﻿.body {
+    height: 330px;
+    width: 500px;
+    border: 1px solid orange;
+    font-family: arial;
+    margin: auto;
+}
+
+/* TOP */
+
+.top {
+    width: 500px;
+    height: 64px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+.top-left {
+    display: table-cell;
+    width: 64px;
+    height: 64px;
+    background-color: orange;
+}
+
+.top-middle {
+    display: table-cell;
+    vertical-align: middle;
+    width: 372px;
+    height: 64px;
+}
+
+.top-right {
+    display: table-cell;
+    width: 64px;
+    height: 64px;
+    background-color: orange;
+}
+
+.top-middle-top {
+    display: inline-block;
+    width: 372px;
+    height: 32px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.top-middle-top-left {
+    float: left;
+    width: 186px;
+    height: 32px;
+}
+
+.top-middle-top-right {
+    float: right;
+    width: 186px;
+    height: 32px;
+}
+
+.top-middle-bottom {
+    display: inline-block;
+    width: 372px;
+    height: 32px;
+    font-size: 10px;
+}
+
+.icon-img {
+    width: 64px;
+    height: 64px;
+}
+
+/* MIDDLE */
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+    width: 500px;
+    height: 64px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+.middle-top {
+    width: 500px;
+    height: 32px;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.middle-bottom {
+    display: inline-block;
+    width: 500px;
+    height: 32px;
+    font-size: 14px;
+}
+
+.middle-bottom-left {
+    float: left;
+    width: 250px;
+    height: 32px;
+}
+
+.middle-bottom-right {
+    float: right;
+    width: 250px;
+    height: 32px;
+}
+
+
+/* BOTTOM */
+
+.bottom {
+    display: inline-block;
+    margin: auto;
+    width: 500px;
+    height: 160px;
+    padding-bottom: 20px;
+    margin: auto;
+}
+
+.barcode-img {
+    display: block;
+    max-width: 480px;
+    max-height: 160px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.p-left-8 {
+    padding-left: 8px;
+}
+
+.p-right-8 {
+    padding-right: 8px;
+}
+
+
+.t-a-right {
+    text-align: right;
+}
+
+.t-a-center {
+    text-align: center;
+}

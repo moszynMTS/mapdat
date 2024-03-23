@@ -1,0 +1,12 @@
+C:\projekty\margiz.be\src\Margiz.Infrastructure\bin\Release\net6.0\Margiz.Infrastructure.deps.json
+C:\projekty\margiz.be\src\Margiz.Infrastructure\bin\Release\net6.0\Margiz.Infrastructure.dll
+C:\projekty\margiz.be\src\Margiz.Infrastructure\bin\Release\net6.0\Margiz.Infrastructure.pdb
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.csproj.AssemblyReference.cache
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.AssemblyInfoInputs.cache
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.AssemblyInfo.cs
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.csproj.CoreCompileInputs.cache
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.dll
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\refint\Margiz.Infrastructure.dll
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\Margiz.Infrastructure.pdb
+C:\projekty\margiz.be\src\Margiz.Infrastructure\obj\Release\net6.0\ref\Margiz.Infrastructure.dll

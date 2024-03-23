@@ -1,0 +1,17 @@
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\bin\Debug\net6.0\MapDat.Persistance.deps.json
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\bin\Debug\net6.0\MapDat.Persistance.runtimeconfig.json
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\bin\Debug\net6.0\MapDat.Persistance.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\bin\Debug\net6.0\MapDat.Persistance.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\bin\Debug\net6.0\MapDat.Domain.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\bin\Debug\net6.0\MapDat.Domain.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.csproj.AssemblyReference.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.GeneratedMSBuildEditorConfig.editorconfig
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.AssemblyInfoInputs.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.AssemblyInfo.cs
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.csproj.CoreCompileInputs.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.csproj.CopyComplete
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\refint\MapDat.Persistance.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\MapDat.Persistance.genruntimeconfig.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Persistance\obj\Debug\net6.0\ref\MapDat.Persistance.dll

@@ -1,0 +1,183 @@
+﻿.login-background {
+    background-image: url("/login-background-2.png");
+    height: 100vh;
+    background-size: cover;
+}
+
+.login-page {
+    display: flex;
+}
+
+.half-width{
+    width:50%;
+}
+
+.btn {
+    border-radius: 1px;
+
+    &.btn-primary {
+        background-color: #43425d;
+        border-color: #43425d;
+    }
+}
+
+.login-form {
+    h1 {
+        color: #43425d;
+        font-size: 40px;
+        text-transform: none;
+        text-align: center;
+    }
+
+    h2 {
+        color: #a1a1ae;
+        font-size: 19px;
+        text-align: center;
+        font-weight: 400;
+        padding-top: 6px;
+    }
+
+    input {
+        border-radius: 0px;
+        border-top-style: none;
+        border-left-style: none;
+        border-right-style: none;
+        border-color: black;
+        box-shadow: none;
+
+        &:focus {
+            box-shadow: none;
+        }
+
+        &:hover {
+            box-shadow: none;
+            transition: none;
+        }
+    }
+}
+.login-form-card {
+    display: flex;
+    min-height: 300px;
+    height: 100vh;
+    margin-top: 0px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.panel-login{
+    width: 400px;
+}
+
+.navbar-header {
+    position: relative;
+    top: -4px;
+}
+
+.navbar-brand > .icon-banner {
+    position: relative;
+    top: -2px;
+    display: inline;
+}
+
+.icon {
+    position: relative;
+    top: -10px;
+}
+
+.logged-out iframe {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.page-consent {
+    .client-logo {
+        float: left;
+
+        img {
+            width: 80px;
+            height: 80px;
+        }
+    }
+
+    .consent-buttons {
+        margin-top: 25px;
+    }
+
+    .consent-form {
+        .consent-scopecheck {
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .consent-scopecheck[disabled] {
+            //visibility:hidden;
+        }
+
+        .consent-description {
+            margin-left: 25px;
+
+            label {
+                font-weight: normal;
+            }
+        }
+
+        .consent-remember {
+            padding-left: 16px;
+        }
+    }
+}
+
+.grants {
+    .page-header {
+        margin-bottom: 10px;
+    }
+
+    .grant {
+        margin-top: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid lightgray;
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .clientname {
+            font-size: 140%;
+            font-weight: bold;
+        }
+
+        .granttype {
+            font-size: 120%;
+            font-weight: bold;
+        }
+
+        .created {
+            font-size: 120%;
+            font-weight: bold;
+        }
+
+        .expires {
+            font-size: 120%;
+            font-weight: bold;
+        }
+
+        li {
+            list-style-type: none;
+            display: inline;
+
+            &:after {
+                content: ', ';
+            }
+
+            &:last-child:after {
+                content: '';
+            }
+
+            .displayname {
+            }
+        }
+    }
+}

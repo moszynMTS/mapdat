@@ -1,0 +1,12 @@
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\bin\Debug\net6.0\MapDat.Infrastructure.deps.json
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\bin\Debug\net6.0\MapDat.Infrastructure.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\bin\Debug\net6.0\MapDat.Infrastructure.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.csproj.AssemblyReference.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.AssemblyInfoInputs.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.AssemblyInfo.cs
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.csproj.CoreCompileInputs.cache
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\refint\MapDat.Infrastructure.dll
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\MapDat.Infrastructure.pdb
+D:\studia\magisterka\sem1\bedlaProj\margiz.be\src\Margiz.Infrastructure\obj\Debug\net6.0\ref\MapDat.Infrastructure.dll

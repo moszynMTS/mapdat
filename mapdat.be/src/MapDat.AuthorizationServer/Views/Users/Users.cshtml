@@ -1,0 +1,20 @@
+﻿@model List<AuthorizationServer.Models.ApplicationUser>
+@{ ViewData["Title"] = "Users"; }
+
+<h3>List of demo users <small>so you can log in to try the app</small> </h3>
+<p>NOTE: The Email address is also the Password!</p>
+<table class="table">
+    <tr>
+        <th>User Name/Email</th>
+        <th>Email</th>
+        <th>Details</th>
+    </tr>
+    @foreach (var user in @Model)
+    {
+    <tr>
+        <td>@user.UserName</td>
+        <td>@user.Email</td>
+        <td><a data-id="0" href="@Url.Action("UserDetails", "Users", new {userid=user.Id})">User details</a></td>    
+    </tr>
+    }
+</table>

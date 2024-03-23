@@ -1,0 +1,33 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+@{ ViewData["Title"] = "Users"; }
+
+<h3>List of demo users <small>so you can log in to try the app</small> </h3>
+<p>NOTE: The Email address is also the Password!</p>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>NormalizedName</th>
+        <th>Details</th>
+    </tr>
+    @foreach (var role in @Model)
+    {
+<tr>
+    <td>@role.Id</td>
+    <td>@role.Name</td>
+    <td>@role.NormalizedName</td>
+    <td><a data-id="0" href="@Url.Action("RoleDetails", "Roles", new {roleid=role.Id})">User details</a></td>
+</tr>
+}
+</table>
+
+<label>
+    AddRole
+</label>
+
+
+@using (Html.BeginForm("AddRole", "Roles"))
+{
+<input type="text" id="roleName" name="roleName" value="" style="height:20px; width:380px;" />
+<button id="FinalRejectionBtn">Add</button>
+}

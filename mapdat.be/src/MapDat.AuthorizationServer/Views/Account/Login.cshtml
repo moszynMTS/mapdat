@@ -1,0 +1,85 @@
+﻿@model LoginViewModel
+<div class="login-page">
+    <div class="half-width">
+        <div class="login-background"></div>
+    </div>
+    <div class="half-width">
+        <div class="login-form-card">
+            <div class="login-form">
+
+                <div class="app-login-logo-container">
+                    <div class="app-login-logo">
+                        <img src="/login_logo.png">
+                    </div>
+                </div>
+
+                <partial name="_ValidationSummary" />
+
+                @if (Model.EnableLocalLogin)
+                {
+
+                    <div class="panel-login">
+                        <div class="panel-body">
+
+                            <form asp-route="Login">
+                                <input type="hidden" asp-for="ReturnUrl" />
+
+                                <fieldset>
+                                    <div class="form-group">
+                                        @*<label asp-for="Username"></label>*@
+                                        <input class="form-control" placeholder="Login" asp-for="Username" autofocus>
+                                    </div>
+                                    <div class="form-group">
+                                        @*<label asp-for="Password"></label>*@
+                                        <input type="password" class="form-control" placeholder="Hasło" asp-for="Password" autocomplete="off">
+                                    </div>
+                                    @if (Model.AllowRememberLogin)
+                                    {
+                                        <div class="form-group login-remember">
+                                            <label asp-for="RememberLogin">
+                                                <input asp-for="RememberLogin">
+                                                <strong>Remember my login</strong>
+                                            </label>
+                                        </div>
+                                    }
+
+                                    <div>
+                                        @*<p>The default users are alice/bob, password: Pass123$</p>*@
+                                    </div>
+
+                                    <div class="form-group login-actions-bar">
+                                        <figure class="item login-button-container">
+                                            <button class="login-button" name="button" value="login">Login</button>
+                                            @*<figcaption class="login-button-caption">Zaloguj</figcaption>*@
+                                        </figure>
+                                        @*<button class="btn btn-default" name="button" value="cancel">Cancel</button>*@
+
+                                    </div>
+                                    @*<div class="form-group">
+                                <a asp-action="GeneratePasswordReset" asp-route-returnUrl="@Model.ReturnUrl">Zapomniałeś hasła?</a>
+                                </div>*@
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                }
+
+                @if (!Model.EnableLocalLogin && !Model.VisibleExternalProviders.Any())
+                {
+                    <div class="alert alert-warning">
+                        <strong>Invalid login request</strong>
+                        There are no login schemes configured for this client.
+                    </div>
+                }
+
+            </div>
+        </div>
+        <div class="footer-container">
+            <div class="form-group">
+                <a asp-action="GeneratePasswordReset" asp-route-returnUrl="@Model.ReturnUrl">Forgot password?</a>
+            </div>
+        </div>
+    </div>
+    <script src="~/js/download-mobile.js" type="text/javascript" asp-append-version="true"></script>
+</div>
+

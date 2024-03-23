@@ -1,0 +1,31 @@
+﻿@model List<string>
+@{ ViewData["Title"] = "Users"; }
+
+<h3>List of demo users <small>so you can log in to try the app</small> </h3>
+<p>NOTE: The Email address is also the Password!</p>
+<table class="table">
+    <tr>
+
+        <th>Claims</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        <span>
+            @item
+        </span>
+    </td>
+</tr>}
+</table>
+
+@using (Html.BeginForm("AddEnumClaimToRole", "Roles"))
+{
+<div>
+    <label for="roleId">RoleId</label>
+    <input type="text" id="roleId" name="roleId" value="" style="height:20px; width:380px;" />
+    <label for="claim">ClaimEnumValue</label>
+    <input type="text" id="claim" name="claim" value="" style="height:20px; width:380px;" />
+    <button id="FinalRejectionBtn">Add</button>
+</div>}

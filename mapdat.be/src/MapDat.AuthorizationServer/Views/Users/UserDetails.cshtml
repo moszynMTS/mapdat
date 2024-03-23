@@ -1,0 +1,60 @@
+﻿@model AuthorizationServer.Models.UserDetails
+@{ ViewData["Title"] = "Users"; }
+
+<h3>List of demo users <small>so you can log in to try the app</small> </h3>
+<p>NOTE: The Email address is also the Password!</p>
+<table class="table">
+    <tr>
+        <th>User ID</th>
+        <th>User Name/Email</th>
+        <th>Roles</th>
+        <th>Claims</th>
+    </tr>
+
+    <tr>
+        <td>
+            @Model.UserId
+        </td>
+        <td>
+            @Model.UserName
+        </td>
+        <td>
+            @foreach (var item in Model.Roles)
+            {
+                <span>
+                    @item
+                </span>
+            }
+        </td>
+        <td>
+            @foreach (var item in Model.Claims)
+            {
+                <span>
+                    @item
+                </span>
+            }
+        </td>
+    </tr>
+</table>
+
+@using (Html.BeginForm("AddUserToRole", "Users"))
+{
+    <div>
+    <label for="roleName">Rola</label>
+    <input type="text" id="roleName" name="roleName" value="" style="height:20px; width:380px;" />
+    <label for="userId">UserId</label>
+    <input type="text" id="userId" name="userId" value="" style="height:20px; width:380px;" />
+    <button id="AddRole">Add</button>
+    </div>
+}
+
+@using (Html.BeginForm("SetDataKey", "Users"))
+{
+    <div>
+    <label for="userId">UserId</label>
+    <input type="text" id="userId" name="userId" value="" style="height:20px; width:380px;" />
+    <label for="dataKey">DataKey</label>
+    <input type="text" id="dataKey" name="dataKey" value="" style="height:20px; width:380px;" />
+    <button id="SetDataKey">Set</button>
+    </div>
+}

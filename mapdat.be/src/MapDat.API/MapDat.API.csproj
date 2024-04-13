@@ -12,6 +12,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
     <PackageReference Include="ZXing.Net.Bindings.Windows.Compatibility" Version="0.16.12" />
@@ -19,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MapDat.Application\MapDat.Application.csproj" />
-    <ProjectReference Include="..\MapDat.Infrastructure\MapDat.Infrastructure.csproj" />
     <ProjectReference Include="..\MapDat.Persistance\MapDat.Persistance.csproj" />
   </ItemGroup>
 

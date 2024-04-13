@@ -8,7 +8,6 @@ namespace MapDat.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(AuthenticationSchemes = "Bearer")]
     public class BaseApiController : ControllerBase
     {
         private ISender? _mediator;

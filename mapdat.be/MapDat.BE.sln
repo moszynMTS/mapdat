@@ -9,10 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDat.API", "src\MapDat.AP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDat.Application", "src\MapDat.Application\MapDat.Application.csproj", "{AD57B26E-ACC3-4122-8FC9-DD739A4DB479}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDat.AuthorizationServer", "src\MapDat.AuthorizationServer\MapDat.AuthorizationServer.csproj", "{9ACBCEEA-9C35-4AEC-973D-3905C8D51350}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDat.Infrastructure", "src\MapDat.Infrastructure\MapDat.Infrastructure.csproj", "{142CCE04-2CCB-4568-B584-62AF1F90A000}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDat.Persistance", "src\MapDat.Persistance\MapDat.Persistance.csproj", "{44EC9045-FA84-4B14-BD37-937B3BEB1FB1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapDat.Domain", "src\MapDat.Domain\MapDat.Domain.csproj", "{C5FADE9C-C857-421E-9700-B175BB3E537F}"
@@ -31,14 +27,6 @@ Global
 		{AD57B26E-ACC3-4122-8FC9-DD739A4DB479}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD57B26E-ACC3-4122-8FC9-DD739A4DB479}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD57B26E-ACC3-4122-8FC9-DD739A4DB479}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9ACBCEEA-9C35-4AEC-973D-3905C8D51350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9ACBCEEA-9C35-4AEC-973D-3905C8D51350}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9ACBCEEA-9C35-4AEC-973D-3905C8D51350}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9ACBCEEA-9C35-4AEC-973D-3905C8D51350}.Release|Any CPU.Build.0 = Release|Any CPU
-		{142CCE04-2CCB-4568-B584-62AF1F90A000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{142CCE04-2CCB-4568-B584-62AF1F90A000}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{142CCE04-2CCB-4568-B584-62AF1F90A000}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{142CCE04-2CCB-4568-B584-62AF1F90A000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44EC9045-FA84-4B14-BD37-937B3BEB1FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{44EC9045-FA84-4B14-BD37-937B3BEB1FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44EC9045-FA84-4B14-BD37-937B3BEB1FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -14,6 +14,7 @@
     <PackageReference Include="MediatR" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.24.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.0.2" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.9" />
@@ -22,7 +23,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MapDat.Domain\MapDat.Domain.csproj" />
-    <ProjectReference Include="..\MapDat.Infrastructure\MapDat.Infrastructure.csproj" />
     <ProjectReference Include="..\MapDat.Persistance\MapDat.Persistance.csproj" />
   </ItemGroup>
 

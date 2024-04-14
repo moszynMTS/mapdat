@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { StatusBar, StyleSheet, Text, View } from "react-native"
 import { HeaderView } from "../../components/HeaderView";
+import { Map } from "../../components/Map";
 
 export const MainScreen = ({ navigation, route }) => {
 
@@ -19,7 +20,7 @@ export const MainScreen = ({ navigation, route }) => {
 
     return(
         <View style={styles.container}>
-        <Text>MapDat</Text>
+        <Map />
         <StatusBar style="auto" />
       </View>
     )
@@ -29,8 +30,7 @@ const styles = StyleSheet.create({
     container: {
         display: "flex",
         flex: 1,
-        justifyContent: "center",
-        alignContent: "center",
-        alignSelf: "center"
+        justifyContent: "center"
+        // backgroundColor: 'red'
     }
   });

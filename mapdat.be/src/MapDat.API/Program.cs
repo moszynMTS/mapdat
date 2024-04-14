@@ -1,10 +1,14 @@
-using MapDat.Domain.Middlewares;
+
+using MapDat.Persistance.MongoSettings;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection(nameof(MongoDBSettings)));
 builder.Services.AddPersistanceServices(builder.Configuration);
 builder.Services.AddApplicationServices();
+
+
 builder.Services.AddApiServices();
 
 

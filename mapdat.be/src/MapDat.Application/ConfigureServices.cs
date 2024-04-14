@@ -1,6 +1,4 @@
-﻿using DinkToPdf;
-using DinkToPdf.Contracts;
-using MapDat.Application.Profiles;
+﻿using MapDat.Application.Profiles;
 using MapDat.Domain.Authorization;
 using MapDat.Persistance.Context;
 using System.Reflection;
@@ -18,6 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddAutoMapper(typeof(AutomapperProfile).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
+
             return services;
 
             // part name label

@@ -3,6 +3,7 @@ using MapDat.Domain.Common;
 using MapDat.Persistance.Context;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using MapDat.Persistance.Services;
 
 namespace MapDat.Application.Features.Common.Queries
 {
@@ -12,6 +13,8 @@ namespace MapDat.Application.Features.Common.Queries
         where TResponse : class
     {
         protected IMapDatDbContext DbContext;
+        protected readonly IWojewodztwaService _wojewodztwaService;
+
         protected IMapper Mapper;
         protected DbSet<TEntity> DbSet { get; set; }
 
@@ -21,7 +24,11 @@ namespace MapDat.Application.Features.Common.Queries
             Mapper = mapper;
             DbSet = DbContext.Set<TEntity>();
         }
-
+        protected BaseQueryHandler(IWojewodztwaService wojewodztwaService, IMapper mapper)
+        {
+            Mapper = mapper;
+            _wojewodztwaService = wojewodztwaService;
+        }
         public abstract Task<BaseResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
     }
 }

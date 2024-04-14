@@ -1,5 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
+import { ApiCaller } from 'src/app/shared/apiCaller/apiCaller';
 
 @Component({
   selector: 'app-map',
@@ -42,11 +43,13 @@ export class MapComponent implements AfterViewInit {
 
   private geoJSONLayer: any;
 
-  constructor() { }
+  constructor(private apiCaller: ApiCaller) {
+   }
 
   ngAfterViewInit(): void {
     this.initMap();
     this.addGeoJSONLayer(); 
+    this.testConnection();
   }
 
   private initMap(): void {
@@ -68,5 +71,14 @@ export class MapComponent implements AfterViewInit {
         }
       }).addTo(this.map);
     });
+  }
+
+  private testConnection(){
+    console.log("test connection")
+    this.apiCaller.setControllerPath('Test');
+    this.apiCaller.test('test').subscribe((res:any)=>{
+      let time = `${res.content.name} z API`;
+      alert(time);
+    })
   }
 }

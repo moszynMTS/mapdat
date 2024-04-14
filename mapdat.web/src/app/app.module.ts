@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { MapComponent } from './components/map/map.component';
+import { ApiCaller } from './shared/apiCaller/apiCaller';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -10,9 +12,12 @@ import { MapComponent } from './components/map/map.component';
     MapComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [    
+    ApiCaller,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

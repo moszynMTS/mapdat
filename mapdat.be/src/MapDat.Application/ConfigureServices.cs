@@ -18,7 +18,6 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddAutoMapper(typeof(AutomapperProfile).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
-            services.AddSingleton<IConverter>(new SynchronizedConverter(new PdfTools()));
             return services;
 
             // part name label

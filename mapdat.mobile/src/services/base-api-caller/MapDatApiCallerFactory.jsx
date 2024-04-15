@@ -11,4 +11,4 @@ class MapDatApiCallerFactory {
   }
 }
 
-export default MargizApiCallerFactory;
+export default MapDatApiCallerFactory;

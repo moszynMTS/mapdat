@@ -34,7 +34,7 @@ namespace MapDat.Application.Models.Wojewodztwa
             foreach (var item in x.AsBsonArray)
             {
                 var s = item.ToString();
-                s = s.Replace("[", "").Replace("]", "");
+                s = s.Replace(" ", "").Replace("[", "").Replace("]", "");
                 test.Add(s.Split(','));
             }
             return test;

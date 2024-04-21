@@ -26,16 +26,26 @@ namespace MapDat.Application.Models.Wojewodztwa
         public PropertiesViewModel Properties { get; set; } = null!;
         public GeometryViewModel Geometry { get; set; } = null!;
 
-        private List<string[]> ParseBisonArray(BsonArray coordinates)
+        private List<double[]> ParseBisonArray(BsonArray coordinates)
         {
             BsonValue x = coordinates[0];
-            List<string[]> test = new List<string[]>();
+            List<double[]> test = new List<double[]>();
 
             foreach (var item in x.AsBsonArray)
             {
                 var s = item.ToString();
                 s = s.Replace(" ", "").Replace("[", "").Replace("]", "");
-                test.Add(s.Split(','));
+                var tmp = s.Split(',');
+                double[] doubles = new double[tmp.Length];
+                for(int i=0; i<tmp.Length; i++)
+                {
+                    string xaa = tmp[i];
+                    string res = xaa.Substring(xaa.IndexOf('.') + 1, Math.Min(4, xaa.Length - xaa.IndexOf('.') - 1));
+                    var y = xaa.Split('.');
+                    tmp[i] = y[0]+','+res;
+                    doubles[i] = double.Parse(tmp[i]);
+                }
+                test.Add(doubles);
             }
             return test;
         }

@@ -19,21 +19,18 @@ namespace MapDat.Application.Features.Common.Queries
         public abstract Task<BaseResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
         public string ToGeoJson(MyGeoObject entity)
         {
-            return entity.ToJson();
-            /*var coordinates = new List<string>();
-            foreach(var coordinate in entity.Geometry.Coordinates)
-                coordinates.Add($"[{coordinate[0]},{coordinate[1]}]");
-            var coordinatesString = string.Join(",", coordinates);
+            var coordinatesString = entity.Geometry.Coordinates.ToString();
+            string result = coordinatesString.Substring(1, coordinatesString.Length - 2);
             return $"{{" +
                 $"\"type\": \"{entity.Type}\"," +
                 $"  \"geometry\": " +
                 $"{{   \"type\": \"{entity.Geometry.Type}\"," +
-                $"    \"coordinates\": [{coordinatesString}]" +
+                $"    \"coordinates\": {result}" +
                 $"  }}," +
                 $"  \"properties\": {{" +
                 $"    \"name\": \"{entity.Properties.Name}\"" +
                 $"  }}" +
-                $"}}";*/
+                $"}}";
         }
     }
 }

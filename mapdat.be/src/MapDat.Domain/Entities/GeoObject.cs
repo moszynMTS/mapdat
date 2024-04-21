@@ -23,6 +23,6 @@ namespace MapDat.Domain.Entities
         [BsonElement("type")]
         public string Type { get; set; } = String.Empty;
         [BsonElement("coordinates")]
-        public BsonArray Coordinates { get; set; } = null!;
+        public BsonValue Coordinates { get; set; } = null!;
     }
 }

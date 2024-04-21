@@ -1,7 +1,4 @@
-﻿using MapDat.Application.Profiles;
-using MapDat.Domain.Authorization;
-using MapDat.Persistance.Context;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -11,10 +8,6 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
 
-            services.AddScoped<IMapDatDbContext, MapDatDbContext>();
-            services.AddScoped<ICurrentUser, CurrentUserService>();
-
-            services.AddAutoMapper(typeof(AutomapperProfile).Assembly);
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 
             return services;

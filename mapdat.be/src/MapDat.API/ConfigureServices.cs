@@ -15,7 +15,6 @@ namespace Microsoft.Extensions.DependencyInjection
                     .AllowAnyHeader()
                     .AllowAnyMethod()));
 
-
             services.AddSwaggerGen(opt =>
             {
                 opt.SwaggerDoc("v1", new OpenApiInfo { Title = "MapDatAPI", Version = "v1" });

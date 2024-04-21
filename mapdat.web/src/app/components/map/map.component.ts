@@ -39,7 +39,7 @@ export class MapComponent implements AfterViewInit {
     'https://raw.githubusercontent.com/ppatrzyk/polska-geojson/master/powiaty/powiaty-min.geojson'
   ];
   private usedMap: number = 0;
-  private usedLayer: number = 3;
+  private usedLayer: number = 1;
 
   private geoJSONLayer: any;
 

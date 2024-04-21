@@ -1,13 +1,11 @@
-﻿using MongoDB.Bson;
+﻿using MapDat.Domain.Common;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace MapDat.Domain.Entities
 {
-    public class GeoObject
+    public class MyGeoObject : BaseEntity
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } = String.Empty;
         [BsonElement("type")]
         public string Type { get; set; } = String.Empty;
         [BsonElement("properties")]
@@ -25,6 +23,6 @@ namespace MapDat.Domain.Entities
         [BsonElement("type")]
         public string Type { get; set; } = String.Empty;
         [BsonElement("coordinates")]
-        public BsonArray[] Coordinates { get; set; } = null!;
+        public BsonArray Coordinates { get; set; } = null!;
     }
 }

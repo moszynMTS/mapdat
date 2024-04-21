@@ -1,13 +1,11 @@
-﻿using MapDat.Application.Interfaces;
-
-namespace MapDat.Application.Features.Common
+﻿namespace MapDat.Application.Features.Common
 {
-    public class BaseIdentifiableRequest : BaseRequest, IIdentifiable
+    public class BaseIdentifiableRequest : BaseRequest
     {
         public Guid Id { get; set; }
     }
 
-    public class BaseIdentifiableRequest<TResponse> : BaseRequest<TResponse>, IIdentifiable
+    public class BaseIdentifiableRequest<TResponse> : BaseRequest<TResponse>
     {
         public Guid Id { get; set; }
     }

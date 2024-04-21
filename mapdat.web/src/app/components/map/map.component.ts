@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import { ApiCaller } from 'src/app/shared/apiCaller/apiCaller';
+import { GeoObjects } from 'src/app/shared/apiCaller/interfaces';
 
 @Component({
   selector: 'app-map',
@@ -48,8 +49,8 @@ export class MapComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.initMap();
-    this.addGeoJSONLayer(); 
-    this.testConnection();
+    //this.addGeoJSONLayer(); 
+    this.getCommunes();
   }
 
   private initMap(): void {
@@ -58,27 +59,49 @@ export class MapComponent implements AfterViewInit {
     L.tileLayer(this.mapStrings[this.usedMap].url, this.mapStrings[this.usedMap].options).addTo(this.map);
   }
 
-  private addGeoJSONLayer(): void {
-    fetch(this.layerStrings[this.usedLayer]).then(res => res.json()).then(data => {
-      this.geoJSONLayer = L.geoJSON(data, {
-        style: {
-          fillColor: 'rgba(29, 136, 229, 0.3)',
-          weight: 2,
-          opacity: 1,
-          color: 'rgba(29, 136, 229, 1)',
-          dashArray: '3',
-          fillOpacity: 0.7
-        }
-      }).addTo(this.map);
-    });
-  }
-
-  private testConnection(){
-    console.log("test connection")
-    this.apiCaller.setControllerPath('Test');
-    this.apiCaller.test('test').subscribe((res:any)=>{
-      let time = `${res.content.name} z API`;
-      alert(time);
+private getCommunes(){
+  this.apiCaller.setControllerPath('Wojewodztwa');
+  this.apiCaller.getWojewodztwa().subscribe((res: any) => {;
+    let list: any[] = [];
+    res.content.forEach((x:any)=>{
+      list.push(this.addGeoJSONLayer(x));
     })
-  }
+    this.setLayers(list);
+  });
+}
+private setLayers(list: any[]){
+  var tmp = {
+    "type": "FeatureCollection",
+    "features": 
+       list
+    
+  };
+  console.log(JSON.stringify(tmp))
+  this.geoJSONLayer = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
+    style: {
+      fillColor: 'rgba(29, 136, 229, 0.3)',
+      weight: 2,
+      opacity: 1,
+      color: 'rgba(29, 136, 229, 1)',
+      dashArray: '3',
+      fillOpacity: 0.7
+    }
+  }).addTo(this.map);
+}
+
+private addGeoJSONLayer(geo: any) {
+  var geojsonFeature = {
+    "type": geo.type,
+    "properties": {
+        "name": geo.properties.name,
+        "popupContent": geo.properties.name
+    },
+    "geometry": {
+        "type": geo.geometry.type,
+        "coordinates": [[geo.geometry.coordinates]]
+    }
+  };
+  return geojsonFeature
+}
+
 }

@@ -9,6 +9,6 @@ namespace MapDat.Application.Models.GeoObjects
     public class GeometryViewModel
     {
         public string Type { get; set; } = String.Empty;
-        public string Coordinates { get; set; } = null!;
+        public List<string[]> Coordinates { get; set; } = new List<string[]>();
     }
 }

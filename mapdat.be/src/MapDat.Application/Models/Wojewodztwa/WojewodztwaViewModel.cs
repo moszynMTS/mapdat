@@ -1,5 +1,7 @@
 ﻿using MapDat.Domain.Entities;
 using MapDat.Application.Models.GeoObjects;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 
 namespace MapDat.Application.Models.Wojewodztwa
 {
@@ -16,12 +18,26 @@ namespace MapDat.Application.Models.Wojewodztwa
             Geometry = new GeometryViewModel()
             {
                 Type = entity.Geometry.Type,
-                Coordinates = entity.Geometry.Coordinates[0].ToString()
+                Coordinates = ParseBisonArray(entity.Geometry.Coordinates)
             };
         }
         public string Id { get; set; } = String.Empty;
         public string Type { get; set; } = String.Empty;
         public PropertiesViewModel Properties { get; set; } = null!;
         public GeometryViewModel Geometry { get; set; } = null!;
+
+        private List<string[]> ParseBisonArray(BsonArray coordinates)
+        {
+            BsonValue x = coordinates[0];
+            List<string[]> test = new List<string[]>();
+
+            foreach (var item in x.AsBsonArray)
+            {
+                var s = item.ToString();
+                s = s.Replace("[", "").Replace("]", "");
+                test.Add(s.Split(','));
+            }
+            return test;
+        }
     }
 }

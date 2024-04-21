@@ -19,6 +19,7 @@ namespace MapDat.Application.Features.Common.Queries
         public abstract Task<BaseResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
         public string ToGeoJson(MyGeoObject entity)
         {
+            return entity.ToJson();
             var coordinatesString = entity.Geometry.Coordinates.ToString();
             string result = coordinatesString.Substring(1, coordinatesString.Length - 2);
             return $"{{" +

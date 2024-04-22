@@ -15,14 +15,14 @@ namespace MapDat.Domain.Entities
     }
     public class PropertiesObject
     {
-        [BsonElement("Nazwa")]
-        public int Name { get; set; }
+        [BsonElement("nazwa")]
+        public string Name { get; set; } = null!;
     }
     public class GeometryObject
     {
         [BsonElement("type")]
         public string Type { get; set; } = String.Empty;
         [BsonElement("coordinates")]
-        public BsonArray Coordinates { get; set; } = null!;
+        public BsonArray[] Coordinates { get; set; } = null!;
     }
 }

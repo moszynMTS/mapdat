@@ -26,28 +26,38 @@ namespace MapDat.Application.Models.Wojewodztwa
         public PropertiesViewModel Properties { get; set; } = null!;
         public GeometryViewModel Geometry { get; set; } = null!;
 
-        private List<double[]> ParseBisonArray(BsonArray coordinates)
+        private List<List<List<List<double>>>> ParseBisonArray(BsonArray[] coordinates)
         {
-            BsonValue x = coordinates[0];
-            List<double[]> test = new List<double[]>();
-
-            foreach (var item in x.AsBsonArray)
+            List<List<List<List<double>>>> result = new List<List<List<List<double>>>>();
+            for (int i = 0; i < coordinates.Length; i++)
             {
-                var s = item.ToString();
-                s = s.Replace(" ", "").Replace("[", "").Replace("]", "");
-                var tmp = s.Split(',');
-                double[] doubles = new double[tmp.Length];
-                for(int i=0; i<tmp.Length; i++)
+                var x = coordinates[i];
+                List<List<List<double>>> test = new List<List<List<double>>>();
+                foreach (var item in x.AsBsonArray)
                 {
-                    string xaa = tmp[i];
-                    string res = xaa.Substring(xaa.IndexOf('.') + 1, Math.Min(4, xaa.Length - xaa.IndexOf('.') - 1));
-                    var y = xaa.Split('.');
-                    tmp[i] = y[0]+','+res;
-                    doubles[i] = double.Parse(tmp[i]);
+                    var s = item.ToString();
+                    s = s.Replace(" ", "").Replace("[", "").Replace("]", "");
+                    var tmp = s.Split(',');
+                    List<List<double>> doubles = new List<List<double>>();
+                    for (int j = 0; j < tmp.Length/2; j++)
+                    {
+                        List<double> values = new List<double>();
+                        for (int k = 0; k < 2; k++)
+                        {
+                            string xaa = tmp[j+k];
+                            string res = xaa.Substring(xaa.IndexOf('.') + 1, Math.Min(4, xaa.Length - xaa.IndexOf('.') - 1));
+                            var y = xaa.Split('.');
+                            xaa = y[0] + ',' + res;
+                            values.Add(double.Parse(xaa));
+                        }
+                        doubles.Add(values);
+                        j++;
+                    }
+                    test.Add(doubles);
                 }
-                test.Add(doubles);
+                result.Add(test);
             }
-            return test;
+            return result;
         }
     }
 }

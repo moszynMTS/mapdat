@@ -8,6 +8,6 @@ namespace MapDat.Application.Models.GeoObjects
 {
     public class PropertiesViewModel
     {
-        public int Name { get; set; }
+        public string? Name { get; set; }
     }
 }

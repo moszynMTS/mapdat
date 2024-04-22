@@ -39,7 +39,7 @@ namespace MapDat.Application.Models.Wojewodztwa
                     s = s.Replace(" ", "").Replace("[", "").Replace("]", "");
                     var tmp = s.Split(',');
                     List<List<double>> doubles = new List<List<double>>();
-                    for (int j = 0; j < tmp.Length/2; j++)
+                    for (int j = 0; j < tmp.Length; j=j+2)
                     {
                         List<double> values = new List<double>();
                         for (int k = 0; k < 2; k++)
@@ -51,7 +51,6 @@ namespace MapDat.Application.Models.Wojewodztwa
                             values.Add(double.Parse(xaa));
                         }
                         doubles.Add(values);
-                        j++;
                     }
                     test.Add(doubles);
                 }

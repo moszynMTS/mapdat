@@ -98,7 +98,7 @@ private addGeoJSONLayer(geo: any) {
     },
     "geometry": {
         "type": geo.geometry.type,
-        "coordinates": [[geo.geometry.coordinates]]
+        "coordinates": geo.geometry.coordinates
     }
   };
   return geojsonFeature

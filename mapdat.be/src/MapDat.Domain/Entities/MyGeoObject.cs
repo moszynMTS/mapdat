@@ -4,12 +4,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MapDat.Domain.Entities
 {
-    public class MyGeoObject : BaseEntity
+    public class MyGeoObject<TProperties> : BaseEntity 
+        where TProperties : PropertiesObject
     {
         [BsonElement("type")]
         public string Type { get; set; } = String.Empty;
         [BsonElement("properties")]
-        public PropertiesObject Properties { get; set; } = null!;
+        public TProperties Properties { get; set; } = null!;
         [BsonElement("geometry")]
         public GeometryObject Geometry { get; set; } = null!;
     }

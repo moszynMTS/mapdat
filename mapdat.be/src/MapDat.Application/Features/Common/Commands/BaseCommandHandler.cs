@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using MapDat.Domain.Common;
+﻿using MapDat.Domain.Common;
 using MapDat.Persistance.Services;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace MapDat.Application.Features.Common.Commands
 {
@@ -10,10 +8,10 @@ namespace MapDat.Application.Features.Common.Commands
         where TEntity : BaseEntity
         where TRequest : IRequest<BaseResponse>
     {
-        protected readonly IWojewodztwaService _wojewodztwaService;
-        protected BaseCommandHandler(IWojewodztwaService wojewodztwaService)
+        protected readonly IMongoService _mongoService;
+        protected BaseCommandHandler(IMongoService mongoService)
         {
-            _wojewodztwaService = wojewodztwaService;
+            _mongoService = mongoService;
         }
         public abstract Task<BaseResponse> Handle(TRequest request, CancellationToken cancellationToken);
     }
@@ -22,10 +20,10 @@ namespace MapDat.Application.Features.Common.Commands
         where TEntity : BaseEntity
         where TRequest : IRequest<BaseResponse<TResponse>>
     {
-        protected readonly IWojewodztwaService _wojewodztwaService;
-        protected BaseCommandHandler(IWojewodztwaService wojewodztwaService)
+        protected readonly IMongoService _mongoService;
+        protected BaseCommandHandler(IMongoService mongoService)
         {
-            _wojewodztwaService = wojewodztwaService;
+            _mongoService = mongoService;
         }
         public abstract Task<BaseResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
     }

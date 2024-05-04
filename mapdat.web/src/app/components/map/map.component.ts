@@ -76,7 +76,6 @@ private setLayers(list: any[]){
        list
     
   };
-  console.log(JSON.stringify(tmp))
   this.geoJSONLayer = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
     style: {
       fillColor: 'rgba(29, 136, 229, 0.3)',

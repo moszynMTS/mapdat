@@ -1,6 +1,5 @@
 ﻿using MapDat.Persistance.MongoSettings;
 using MapDat.Persistance.Services;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -17,7 +16,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<IMongoClient>(s =>
                 new MongoClient(configuration.GetSection("MongoDBSettings:MongoDbConnectionString").Value));
 
-            services.AddScoped<IWojewodztwaService, WojewodztwaService>();
+            services.AddScoped<IMongoService, MongoService>();
 
             return services;
         }

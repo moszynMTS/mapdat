@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace MapDat.Domain.Entities
 {
-    public class WojewodztwoEntity : MyGeoObject
+    public class WojewodztwoEntity : MyGeoObject<WojewodztwoPropertiesObject>
+    {
+    }
+    public class WojewodztwoPropertiesObject : PropertiesObject
     {
     }
 }

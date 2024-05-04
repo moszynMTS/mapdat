@@ -1,8 +1,6 @@
-﻿using MapDat.Domain.Common;
-using MediatR;
+﻿using MediatR;
 using MapDat.Persistance.Services;
 using MapDat.Domain.Entities;
-using MongoDB.Driver.GeoJsonObjectModel;
 using MongoDB.Bson;
 
 namespace MapDat.Application.Features.Common.Queries
@@ -11,13 +9,13 @@ namespace MapDat.Application.Features.Common.Queries
         where TRequest : IRequest<BaseResponse<TResponse>>
         where TResponse : class
     {
-        protected readonly IWojewodztwaService _wojewodztwaService;
-        protected BaseQueryHandler(IWojewodztwaService wojewodztwaService)
+        protected readonly IMongoService _mongoService;
+        protected BaseQueryHandler(IMongoService mongoService)
         {
-            _wojewodztwaService = wojewodztwaService;
+            _mongoService = mongoService;
         }
         public abstract Task<BaseResponse<TResponse>> Handle(TRequest request, CancellationToken cancellationToken);
-        public string ToGeoJson(MyGeoObject entity)
+        public string ToGeoJson(MyGeoObject<WojewodztwoPropertiesObject> entity)
         {
             return entity.ToJson();
             var coordinatesString = entity.Geometry.Coordinates.ToString();

@@ -39,9 +39,9 @@ namespace MapDat.Persistance.Services
         {
             return _gminy.Find(x => x.Id == id).FirstOrDefault();
         }
-        public async Task<List<GminaEntity>> GetGminy()
+        public async Task<List<GminaEntity>> GetGminy(string powiat)
         {
-            return await _gminy.Find(x => true).ToListAsync();
+            return await _gminy.Find(x => x.Properties.Powiat == powiat).ToListAsync();
         }
         #endregion
     }

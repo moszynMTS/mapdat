@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { EOVERFLOW } from 'constants';
 import * as L from 'leaflet';
 import { ApiCaller } from 'src/app/shared/apiCaller/apiCaller';
 import { GeoObjects } from 'src/app/shared/apiCaller/interfaces';
@@ -106,6 +107,19 @@ export class MapComponent implements AfterViewInit {
       console.error('Nieprawidłowe współrzędne:', geo);
       return null; 
     }
+    if(geo.geometry.type=="Polygon") {
+      for(let i=0;i<geo.geometry.coordinates.length;i++){
+        var tmpCoord: any[] = []
+        geo.geometry.coordinates[i].forEach((element:any) => {
+          if(element.length==1){
+            tmpCoord.push([element[0][0],element[0][1]])
+          }
+          else
+            tmpCoord.push(element)
+        });
+        geo.geometry.coordinates[i]=tmpCoord; 
+      }
+    }
     var geojsonFeature = {
       "type": geo.type,
       "properties": {
@@ -113,7 +127,7 @@ export class MapComponent implements AfterViewInit {
           "popupContent": geo.properties.name
       },
       "geometry": {
-          "type": geo.geometry.type,
+          "type":  geo.geometry.type,
           "coordinates": geo.geometry.coordinates
       }
     };
@@ -122,7 +136,6 @@ export class MapComponent implements AfterViewInit {
 
 
   private getPowiaty(powiat: any){
-    powiat = "slaskie"
     this.apiCaller.setControllerPath('Powiaty');
     this.apiCaller.getPowiaty(powiat).subscribe((res: any) => {
       this.disableMap();

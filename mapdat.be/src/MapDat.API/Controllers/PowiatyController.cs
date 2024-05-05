@@ -13,5 +13,9 @@ namespace MapDat.API.Controllers
         [HttpGet]
         public async Task<ActionResult<BaseResponse<IEnumerable<PowiatyViewModel>>>> GetPowiaty([FromQuery] GetPowiatyQuery request) =>
             await Mediator.Send(request);
+
+        [HttpGet("ById")]
+        public async Task<ActionResult<BaseResponse<PowiatyViewModel>>> GetPowiat([FromQuery] GetPowiatByIdQuery request) =>
+                await Mediator.Send(request);
     }
 }

@@ -31,6 +31,13 @@ namespace MapDat.Persistance.Services
         {
             return _powiaty.Find(x => x.Id == id).FirstOrDefault();
         }
+        public async Task UpdatePowiaty(string[] powiaty, string woj)
+        {
+            var filter = Builders<PowiatEntity>.Filter.In(x => x.Properties.Name, powiaty);
+            var update = Builders<PowiatEntity>.Update.Set(x => x.Properties.Wojewodztwo, woj);
+
+            await _powiaty.UpdateManyAsync(filter, update);
+        }
         public async Task<List<PowiatEntity>> GetPowiaty(string wojewodztwo)
         {
             return await _powiaty.Find(x => x.Properties.Wojewodztwo== wojewodztwo).ToListAsync();

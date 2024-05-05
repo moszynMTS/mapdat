@@ -1,1 +1,9 @@
-<div id="map" style="height: 80vh;"></div>
+<div class="mainMap">
+    <div class="menu">
+        <h2 class="title">🌎 MAPDAT 🌎</h2>
+        <div class="entity" *ngFor="let x of voivodeshipsList">
+            <p class="title">{{ x?.properties.name | capitalizeFirstLetter }}</p>
+        </div>
+    </div>
+    <div id="map" style="height: 90vh; width: 80vw;"></div>
+</div>

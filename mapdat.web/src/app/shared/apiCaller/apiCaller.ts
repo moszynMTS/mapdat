@@ -4,7 +4,7 @@ import { Observable } from "rxjs";
 
 @Injectable()
 export class ApiCaller {
-    readonly APIUrl = "https://localhost:44324/api/";
+    readonly APIUrl = "https://localhost:7100/api/";
     private typeName: string = "";
 
     constructor(private http: HttpClient) {
@@ -19,6 +19,11 @@ export class ApiCaller {
     }
     getWojewodztwa(): Observable<any[]> {
         return this.http.get<any>(this.APIUrl + this.typeName);
+    }
+
+    getPowiaty(Wojewodztwo: any): Observable<any[]> {
+        const payload = { Wojewodztwo };
+        return this.http.get<any>(this.APIUrl + this.typeName, {params: payload});
     }
       
 }

@@ -118,7 +118,7 @@ export class MapComponent implements AfterViewInit {
           }
         }).addTo(this.map);
         break;
-      case 1:
+      case 3:
         this.geoJSONLayer2 = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
           style: {
             fillColor: 'rgba(29, 136, 229, 0.3)',

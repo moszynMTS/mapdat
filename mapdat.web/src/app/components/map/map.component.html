@@ -1,8 +1,12 @@
 <div class="mainMap">
     <div class="menu">
         <h2 class="title">🌎 MAPDAT 🌎</h2>
+        <div class="selectableMap">
+            <p style="padding-right: 1rem; margin: 0px;">Styl mapy</p>
+            <button class="mapStyleSelector" *ngFor="let y of mapStrings; let i = index" (click)="setLayerView(i)">{{i}}</button>
+        </div>
         <div class="entity" *ngFor="let x of voivodeshipsList">
-            <p class="title">{{ x?.properties.name | capitalizeFirstLetter }}</p>
+            <p class="title" (click)="getPowiaty(x?.properties.name)">{{ x?.properties.name | capitalizeFirstLetter }}</p>
         </div>
     </div>
     <div id="map" style="height: 90vh; width: 80vw;"></div>

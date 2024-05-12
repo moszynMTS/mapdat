@@ -2,7 +2,7 @@
 body {
     --background: #f8f8f8;
     --tile: #ffffff;
-    --tile2:rgb(212, 211, 211)f;
+    --tile2:rgb(212, 211, 211);
     --border: #dddddd;
     background-color: var(--background);
     font-family: "Segoe UI", Arial, sans-serif;
@@ -34,4 +34,16 @@ body {
 }
 .entity:hover{
     background-color: var(--tile2);
+}
+
+.selectableMap{
+    display: flex;
+    margin-bottom: 1rem;
+}
+.mapStyleSelector{
+    background-color: var(--tile);
+    border: 2px solid var(--border);
+}
+.mapStyleSelector:hover{
+    background-color: var(--background);
 }

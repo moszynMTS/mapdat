@@ -5,6 +5,7 @@ namespace MapDat.Application.Models.Wojewodztwa
 {
     public class PowiatyViewModel : MyGeoObjectViewModel<PowiatyPropertiesViewModel>
     {
+        public PowiatyViewModel() { }
         public PowiatyViewModel(PowiatEntity entity)
         {
             Id = entity.Id;

@@ -1,14 +1,17 @@
-import MargizBaseApiCaller from './MargizBaseApiCaller.service'; 
+import MapDatBaseApiCaller from "./MapDatBaseApiCaller.service";
+
 
 class MapDatApiCallerFactory {
   constructor() {
   }
 
   getApiImplementation(dictionaryType) {
-    const apiCallerService = new MargizBaseApiCaller();
+    const apiCallerService = new MapDatBaseApiCaller();
     apiCallerService.setControllerPath(dictionaryType.toString());
     return apiCallerService;
   }
+
+  
 }
 
 export default MapDatApiCallerFactory;

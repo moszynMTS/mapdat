@@ -3,6 +3,7 @@ export const MapHtmlContent = ({
     lon = null,
     area = null,
     draggable = false,
+    list = null
   })  => {
     /*
   marker.on('drag', () => {
@@ -39,25 +40,32 @@ export const MapHtmlContent = ({
           iconAnchor: [16, 37],
           shadowUrl: '', 
         })
-        var map = L.map('map').setView([${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568}], 14);
+        var map = L.map('map').setView([52, 20], 5); 
         
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        var marker = L.marker([${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568}], {draggable: ${draggable}}).addTo(map);
+
+        var tmp = {
+          "type": "FeatureCollection",
+          "features": ${list}
+        };
   
-        var radius = L.circle([${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568}], {
-          radius: ${area},
-          color: '#006ca2',
-          fillColor: 'rgba(51, 187, 255, 0.2)',
-          fillOpacity: 1
+        var geoJSONLayer = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
+          style: {
+            fillColor: 'rgba(29, 136, 229, 0.3)',
+            weight: 2,
+            opacity: 1,
+            color: 'rgba(29, 136, 229, 1)',
+            dashArray: '3',
+            fillOpacity: 0.7
+          },
+          onEachFeature: (feature, layer) => {
+            layer.on('click', () => {
+              window.ReactNativeWebView.postMessage(JSON.stringify(feature));
+            });
+          }
         }).addTo(map);
-  
-        marker.on('drag', () => {
-          const markerLatLng = marker.getLatLng();
-          radius.setLatLng(markerLatLng, ${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568});
-        });
-  
         </script>
     </body>
   </html>

@@ -9,6 +9,7 @@ class GeoJsonFactory {
         data.content.forEach((x: any) => {
           list.push(prepareGeoJSON(x))
         })
+        console.log(list)
         return list;
     }
   

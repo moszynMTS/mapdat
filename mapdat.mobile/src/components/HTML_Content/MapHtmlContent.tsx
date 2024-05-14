@@ -1,10 +1,4 @@
-export const MapHtmlContent = ({
-    lat = null,
-    lon = null,
-    area = null,
-    draggable = false,
-    list = null
-  })  => {
+export const MapHtmlContent = (tmp: any )  => {
     /*
   marker.on('drag', () => {
           const markerLatLng = marker.getLatLng();
@@ -17,6 +11,7 @@ export const MapHtmlContent = ({
           window.ReactNativeWebView.postMessage(JSON.stringify({ markerLatLng, lastCoords: true }));
         });
     */
+   let test = `var data = {"type":"FeatureCollection", "features": ${JSON.stringify(tmp)} };`
   return `
   <!DOCTYPE html>
   <html>
@@ -46,26 +41,11 @@ export const MapHtmlContent = ({
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        var tmp = {
-          "type": "FeatureCollection",
-          "features": ${list}
-        };
-  
-        var geoJSONLayer = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
-          style: {
-            fillColor: 'rgba(29, 136, 229, 0.3)',
-            weight: 2,
-            opacity: 1,
-            color: 'rgba(29, 136, 229, 1)',
-            dashArray: '3',
-            fillOpacity: 0.7
-          },
-          onEachFeature: (feature, layer) => {
-            layer.on('click', () => {
-              window.ReactNativeWebView.postMessage(JSON.stringify(feature));
-            });
-          }
-        }).addTo(map);
+        var data = {"type":"FeatureCollection", "features": ${tmp} };
+        
+
+
+        var geoJSONLayer = L.geoJSON(data).addTo(map);
         </script>
     </body>
   </html>

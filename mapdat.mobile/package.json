@@ -2,6 +2,7 @@
   "name": "mapdat.mobile",
   "version": "1.0.0",
   "main": "node_modules/expo/AppEntry.js",
+  "proxy": "http://localhost:7100",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -11,7 +12,12 @@
   "dependencies": {
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/native-stack": "^6.9.26",
+    "@tanstack/react-query": "^5.34.2",
+    "@tanstack/react-query-devtools": "^5.34.2",
+    "axios": "^1.6.8",
     "expo": "~50.0.14",
+    "expo-build-properties": "~0.11.1",
+    "expo-dev-client": "~3.3.11",
     "expo-splash-screen": "^0.26.4",
     "expo-status-bar": "~1.11.1",
     "react": "18.2.0",
@@ -22,7 +28,12 @@
     "react-navigation": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "@tsconfig/react-native": "^3.0.5",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.2.79",
+    "@types/react-test-renderer": "^18.0.7",
+    "typescript": "^5.4.5"
   },
   "private": true
 }

@@ -12,26 +12,9 @@ class MapDatBaseApiCaller extends BaseApiCaller {
     return this.post("", dto);
   }
 
-  getItem(uniqueId) {
-    return this.get(uniqueId.toString())
-      .then((response) => {
-        if (!response.ok) {
-          if (response.status === 404) {
-            // Obsługa błędu 403 (Forbidden)
-            // console.error("The given item doesn't exist .");
-            return { error: "404" };
-          } else {
-            return { error: response.status };
-            // console.error(`HTTP error: ${response.status}`);
-            throw new Error(`HTTP error: ${response.status}`);
-          }
-        }
-        return response.text();
-      })
-      .then((result) => {
-        return result;
-      });
+  getItem() {
+    return this.get("");
   }
 }
 
-export default MargizBaseApiCaller;
+export default MapDatBaseApiCaller;

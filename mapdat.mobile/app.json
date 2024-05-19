@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "mapdat.mobile",
-    "slug": "mapdat.mobile",
+    "slug": "mapdatmobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -21,10 +21,28 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mrmarioo.mapdatmobile"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "proxy": "https://192.168.1.117:7100"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bbb15b31-668d-4573-8e08-6b248da44024"
+      }
+    },
+    "owner": "mrmarioo",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ]
   }
 }

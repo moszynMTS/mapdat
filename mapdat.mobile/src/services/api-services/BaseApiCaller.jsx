@@ -1,4 +1,5 @@
 import { backendHostname } from "../environments/environments";
+import axios from "axios";
 
 export const API_BASE_URL = backendHostname;
 
@@ -16,30 +17,14 @@ class BaseApiCaller {
   }
 
   async get(path, options = {}) {
-
-    if (options?.params ) {
-      const searchParams = new URLSearchParams();
-
-      Object.keys(options.params).forEach((key) => {
-        if (options.params[key] != null) {
-          searchParams.append(key, options.params[key]);
-        }
-      });
-      if(searchParams.toString() != undefined)
-        path += "?" +searchParams.toString();
-    }
     const fullPath = this.getFullPath(path);
-    // console.log(fullPath);
-
-    const response = await fetch(fullPath , {
-      method: "GET",
-      headers: {
-        Accept: "text/plain",
-      },
-      params: options.params || {},
-    })
-    // this.checkError(response);
-    return response;
+    // const response = await fetch(fullPath , {
+    //   method: "GET",
+    //   headers: {
+    //     Accept: "text/plain",
+    //   },
+    // })
+    return axios.get(fullPath);
   }
 
   async post(path, body, options = {}, contentType = "application/json") {
@@ -117,46 +102,6 @@ class BaseApiCaller {
   }
   
   
-  getPageableParams(filter) {
-    const result = {
-      desc: filter.desc.toString(),
-      orderBy: filter.orderBy,
-      pageNumber: filter.pageNumber.toString(),
-      pageSize: filter.pageSize.toString(),
-      searchTerm: undefined,
-    };
-    if (filter.searchTerm != null && filter.searchTerm.length > 0) {
-      result.searchTerm = filter.searchTerm;
-    }
-  
-    return result;
-  }
-  
-
-  prepareParams(data) {
-    const params = {};
-  
-    Object.keys(data).forEach((item) => {
-      if (data[item] !== null) {
-        if (Array.isArray(data[item])) {
-          data[item].forEach((element) => {
-            if (!params[item]) {
-              params[item] = [];
-            }
-            params[item].push(element);
-          });
-        } else {
-          params[item] = data[item].toString();
-        }
-      }
-    });
-  
-    const paramString = Object.keys(params)
-      .map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-      .join('&');
-  
-    return paramString;
-  }
   
   getFullPath(path) {
     return `${API_BASE_URL}/api/${this.controllerPath}/${path}`;

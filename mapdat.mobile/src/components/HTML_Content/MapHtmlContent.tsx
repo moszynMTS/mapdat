@@ -1,9 +1,4 @@
-export const MapHtmlContent = ({
-    lat = null,
-    lon = null,
-    area = null,
-    draggable = false,
-  })  => {
+export const MapHtmlContent = (tmp: any )  => {
     /*
   marker.on('drag', () => {
           const markerLatLng = marker.getLatLng();
@@ -16,6 +11,7 @@ export const MapHtmlContent = ({
           window.ReactNativeWebView.postMessage(JSON.stringify({ markerLatLng, lastCoords: true }));
         });
     */
+   let test = `var data = {"type":"FeatureCollection", "features": ${JSON.stringify(tmp)} };`
   return `
   <!DOCTYPE html>
   <html>
@@ -39,25 +35,17 @@ export const MapHtmlContent = ({
           iconAnchor: [16, 37],
           shadowUrl: '', 
         })
-        var map = L.map('map').setView([${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568}], 14);
+        var map = L.map('map').setView([52, 20], 5); 
         
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-        var marker = L.marker([${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568}], {draggable: ${draggable}}).addTo(map);
-  
-        var radius = L.circle([${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568}], {
-          radius: ${area},
-          color: '#006ca2',
-          fillColor: 'rgba(51, 187, 255, 0.2)',
-          fillOpacity: 1
-        }).addTo(map);
-  
-        marker.on('drag', () => {
-          const markerLatLng = marker.getLatLng();
-          radius.setLatLng(markerLatLng, ${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568});
-        });
-  
+
+        var data = {"type":"FeatureCollection", "features": ${tmp} };
+        
+
+
+        var geoJSONLayer = L.geoJSON(data).addTo(map);
         </script>
     </body>
   </html>

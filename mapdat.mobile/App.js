@@ -6,6 +6,9 @@ import { Logo } from './src/components/Logo';
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/screens/AppNavigator';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -42,9 +45,11 @@ export default function App() {
   }
 
   return (
-    <SafeAreaProvider>
-      <AppNavigator onLayout={onLayoutRootView} />
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <AppNavigator onLayout={onLayoutRootView} />
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }
 

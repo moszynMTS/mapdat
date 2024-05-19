@@ -40,7 +40,7 @@ namespace MapDat.Persistance.Services
         }
         public async Task<List<PowiatEntity>> GetPowiaty(string wojewodztwo)
         {
-            return await _powiaty.Find(x => x.Properties.Wojewodztwo== wojewodztwo).ToListAsync();
+            return await _powiaty.Find(x => x.Properties.Wojewodztwo.ToLower() == wojewodztwo.ToLower()).ToListAsync();
         }
         public GminaEntity GetGmina(string id)
         {

@@ -1,4 +1,4 @@
-export const MapHtmlContent = (tmp: any )  => {
+export const MapHtmlContent = (tmp: any, layers: number)  => {
     /*
   marker.on('drag', () => {
           const markerLatLng = marker.getLatLng();
@@ -45,7 +45,23 @@ export const MapHtmlContent = (tmp: any )  => {
         
 
 
-        var geoJSONLayer = L.geoJSON(data).addTo(map);
+        var geoJSONLayer = L.geoJSON(data, {
+          style: function (feature) {
+            return {
+              fillColor: 'rgba(29, 136, 229, 0.3)',
+              weight: 2,
+              opacity: 1,
+              color: 'rgba(29, 136, 229, 1)',
+              dashArray: '3',
+              fillOpacity: 0.7
+            };
+          },
+          onEachFeature: function (feature, layer) {
+            layer.on('click', function () {
+              window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'featureClick', feature: feature, layers: ${layers} }));
+            });
+          }
+        }).addTo(map);
         </script>
     </body>
   </html>

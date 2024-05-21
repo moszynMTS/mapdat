@@ -1,9 +1,12 @@
-import { useEffect } from "react";
-import { StatusBar, StyleSheet, Text, View } from "react-native"
+import { useEffect, useState } from "react";
+import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { HeaderView } from "../../components/HeaderView";
 import { Map } from "../../components/Map";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 
 export const MainScreen = ({ navigation, route }) => {
+  const [resetKey, setResetKey] = useState(Math.random());
 
     useEffect(() => {
         navigation.setOptions({
@@ -12,14 +15,16 @@ export const MainScreen = ({ navigation, route }) => {
               <HeaderView
                 title={"Main Page"}
                 styles={{ minHeight: 70 }}
-              ></HeaderView>
+                refreshControl={() => setResetKey(Math.random())}
+              >
+              </HeaderView>
             );
           },
         });
       }, []);
 
     return(
-        <View style={styles.container}>
+        <View style={styles.container} key={resetKey}>
         <Map />
         <StatusBar style="auto" />
       </View>

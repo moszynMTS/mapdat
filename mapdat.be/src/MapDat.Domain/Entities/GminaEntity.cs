@@ -9,5 +9,6 @@ namespace MapDat.Domain.Entities
     {
         [BsonElement("powiat")]
         public string Powiat { get; set; } = null!;
+        public string? PowiatId { get; set; }
     }
 }

@@ -16,14 +16,9 @@ class BaseApiCaller {
     this.controllerPath = "";
   }
 
-  async get(path, options = {}) {
+  async get(path = "", options = {}) {
     const fullPath = this.getFullPath(path);
-    // const response = await fetch(fullPath , {
-    //   method: "GET",
-    //   headers: {
-    //     Accept: "text/plain",
-    //   },
-    // })
+    console.log(fullPath)
     return axios.get(fullPath);
   }
 
@@ -104,7 +99,11 @@ class BaseApiCaller {
   
   
   getFullPath(path) {
-    return `${API_BASE_URL}/api/${this.controllerPath}/${path}`;
+    const baseUrl = `${API_BASE_URL}/api/${this.controllerPath}`;
+    if(path == "")
+      return baseUrl
+    else
+      return baseUrl + path;
   }
 }
 

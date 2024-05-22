@@ -1,12 +1,12 @@
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View, Platform, SafeAreaView } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
 export const HeaderView = ({
   title,
   children,
-  backFunction,
-  backButton = false,
-  secondText = null,
+  refreshControl,
   styles,
   color = "#1e88e5",
 }) => {
@@ -14,14 +14,6 @@ export const HeaderView = ({
   const renderHederLeft = () => {
     return (
       <View style={{ flexDirection: "row", flex: 1 }}>
-        {backButton && (
-          <TouchableOpacity
-            style={{ paddingTop: 6, width: 30, height: 60 }}
-            onPress={() => backFunction()}
-          >
-            <FontAwesomeIcon icon={faChevronLeft} color="white" />
-          </TouchableOpacity>
-        )}
         <View
           style={{
             // paddingLeft: 10,
@@ -35,15 +27,21 @@ export const HeaderView = ({
   };
   const renderHeaderRight = () => {
     return (
-      <View  style={{
+      <View style={{
         // paddingLeft: 10,
         flex: 1,
+        alignItems: "flex-end",
+        justifyContent: "center"
       }}>
-        {secondText != null && (
-          <Text style={[HeaderStyles.headerTexts, { alignSelf: "flex-start" }]}>
-            {secondText}
-          </Text>
-        )}
+        <TouchableOpacity
+          onPress={refreshControl}
+        >
+          <FontAwesomeIcon
+            icon={faArrowsRotate}
+            color="white"
+            size={25}
+          />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -70,7 +68,7 @@ export const HeaderView = ({
       ]}
     >
 
-      {Platform.OS == "android" &&  <StatusBar backgroundColor={color} />}
+      {Platform.OS == "android" && <StatusBar backgroundColor={color} />}
       <View
         style={{
           flex: 4,
@@ -86,7 +84,7 @@ export const HeaderView = ({
         }}
       >
         {renderHederLeft()}
-        {secondText && renderHeaderRight()}
+        {renderHeaderRight()}
       </View>
       <View
         style={{

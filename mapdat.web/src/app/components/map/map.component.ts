@@ -142,14 +142,16 @@ export class MapComponent implements AfterViewInit {
     if (feature.properties && feature.properties.name) {
       switch(layers){
         case 1:
+          console.log("[P] ",feature.properties.name)
           this.getPowiaty(feature.properties.name);
-        break;
-        case 2:
-          this.getGminy(feature.properties.name)
-        break;
-        case 3:
-          //nothing
-        break;
+          break;
+          case 2:
+            console.log("[G] ",feature.properties.name)
+            this.getGminy(feature.properties.name)
+            break;
+          case 3:
+            console.log("[A] ",feature.properties.name, feature.properties.id)
+          break;
       }
     }
   }
@@ -176,7 +178,8 @@ export class MapComponent implements AfterViewInit {
       "type": geo.type,
       "properties": {
           "name": geo.properties.name,
-          "popupContent": geo.properties.name
+          "popupContent": geo.properties.name,
+          "id": geo.id
       },
       "geometry": {
           "type":  geo.geometry.type,

@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Background } from './src/components/Bacground';
-import { Logo } from './src/components/Logo';
+import { Background } from './src/components/layouts/Bacground';
+import { Logo } from './src/components/layouts/Logo';
 import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/screens/AppNavigator';

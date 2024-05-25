@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View, Platform, SafeAreaView } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import { SaveButton } from '../UI_design/SaveButton';
 
 export const HeaderView = ({
   title,
@@ -9,6 +10,7 @@ export const HeaderView = ({
   refreshControl,
   styles,
   color = "#1e88e5",
+  saveGmina
 }) => {
   const insets = useSafeAreaInsets();
   const renderHederLeft = () => {
@@ -31,8 +33,10 @@ export const HeaderView = ({
         // paddingLeft: 10,
         flex: 1,
         alignItems: "flex-end",
-        justifyContent: "center"
+        justifyContent: "space-evenly",
+        flexDirection: "row"
       }}>
+        <SaveButton onPress={saveGmina} />
         <TouchableOpacity
           onPress={refreshControl}
         >

@@ -1,5 +1,5 @@
 import { ActivityIndicator, Modal, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native"
-import { Logo } from "./Logo"
+import { Logo } from "./layouts/Logo"
 
 export const ModalLoader = ({
     message,

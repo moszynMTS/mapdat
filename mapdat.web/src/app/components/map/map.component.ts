@@ -328,13 +328,13 @@ export class MapComponent implements AfterViewInit {
   checkResult(){
     this.apiCaller.setControllerPath('RSPO');
     let sending: string[][] = [
-      this.wojewodztwaList,
-      this.powiatyList,
-      this.gminyList,
-      this.subjects
+      this.wojewodztwaList.map(x=>x.id),
+      this.powiatyList.map(x=>x.id),
+      this.gminyList.map(x=>x.id),
+      this.subjects.map(x=>x.id)
     ];
     console.log(sending);
-    this.apiCaller.getSchools(sending).subscribe((res: any) => {
+    this.apiCaller.getInfo(sending).subscribe((res: any) => {
       console.log("RES", res);
     })
   }

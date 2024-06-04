@@ -1,8 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View, Platform, SafeAreaView } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { SaveButton } from '../UI_design/SaveButton';
+import { useContext } from 'react';
+import { LayerContext } from '../../states/context/LayerContext';
+import OfflineDataService from '../../lib/OfflineMode/OfflineDataService';
 
 export const HeaderView = ({
   title,
@@ -13,6 +16,12 @@ export const HeaderView = ({
   saveGmina
 }) => {
   const insets = useSafeAreaInsets();
+
+  // - context
+  const layerContext = useContext(LayerContext);
+  const {layer} = layerContext;
+
+
   const renderHederLeft = () => {
     return (
       <View style={{ flexDirection: "row", flex: 1 }}>
@@ -36,12 +45,21 @@ export const HeaderView = ({
         justifyContent: "space-evenly",
         flexDirection: "row"
       }}>
-        <SaveButton onPress={saveGmina} />
+        <SaveButton onPress={saveGmina} disabled={layer >= 3} />
         <TouchableOpacity
           onPress={refreshControl}
         >
           <FontAwesomeIcon
             icon={faArrowsRotate}
+            color="white"
+            size={25}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={async () => {console.log( await OfflineDataService.listJsonFiles())}}
+        >
+          <FontAwesomeIcon
+            icon={faDownload}
             color="white"
             size={25}
           />

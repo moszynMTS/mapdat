@@ -1,3 +1,4 @@
 export interface SaveButtonProps {
-    onPress: () => void;
+    onPress: () => void,
+    disabled: boolean
 }

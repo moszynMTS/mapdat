@@ -7,6 +7,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/screens/AppNavigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { LayerProvider } from './src/states/context/LayerContext';
 
 const queryClient = new QueryClient();
 
@@ -46,8 +47,11 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+
       <SafeAreaProvider>
-        <AppNavigator onLayout={onLayoutRootView} />
+        <LayerProvider>
+          <AppNavigator onLayout={onLayoutRootView} />
+        </LayerProvider>
       </SafeAreaProvider>
     </QueryClientProvider>
   );

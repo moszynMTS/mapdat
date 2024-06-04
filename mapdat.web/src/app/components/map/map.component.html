@@ -5,8 +5,23 @@
             <p style="padding-right: 1rem; margin: 0px;">Styl mapy</p>
             <button class="mapStyleSelector" *ngFor="let y of mapStrings; let i = index" (click)="setLayerView(i)">{{i}}</button>
         </div>
-        <div class="entity" *ngFor="let x of voivodeshipsList">
+        <button class="calculate" (click)="checkResult()">
+            Sprawdź
+        </button>
+        <!-- <div class="entity" *ngFor="let x of voivodeshipsList">
             <p class="title" (click)="getPowiaty(x?.properties.name)">{{ x?.properties.name | capitalizeFirstLetter }}</p>
+        </div> -->
+        <h2 class="title2">Województwa ({{wojewodztwaList.length}})</h2>
+        <div class="entity" *ngFor="let x of wojewodztwaList">
+            <p class="title" (click)="removeFromList(1, x?.id)">{{ x?.name | capitalizeFirstLetter }}</p>
+        </div>
+        <h2 class="title2">Powiaty ({{powiatyList.length}})</h2>
+        <div class="entity" *ngFor="let x of powiatyList">
+            <p class="title" (click)="removeFromList(2, x?.id)">{{ x?.name | capitalizeFirstLetter }}</p>
+        </div>
+        <h2 class="title2">Gminy ({{gminyList.length}})</h2>
+        <div class="entity" *ngFor="let x of gminyList">
+            <p class="title" (click)="removeFromList(3, x?.id)">{{ x?.name | capitalizeFirstLetter }}</p>
         </div>
     </div>
     <div id="map" style="height: 90vh; width: 80vw;"></div>

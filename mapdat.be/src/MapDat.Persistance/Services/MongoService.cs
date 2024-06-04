@@ -52,8 +52,11 @@ namespace MapDat.Persistance.Services
         }
         public async Task<List<GminaEntity>> GetGminy(string powiat, string powiatId)
         {
-            return await _gminy.Find(x => (x.Properties.Powiat.ToLower() == powiat.ToLower() && x.Properties.PowiatId==null)
-                                        || x.Properties.PowiatId == powiatId
+            var byId = await _gminy.Find(x => x.Properties.PowiatId == powiatId
+                                        ).ToListAsync();
+            if (byId.Count > 0)
+                return byId;
+            return await _gminy.Find(x => x.Properties.Powiat.ToLower() == powiat.ToLower() && x.Properties.PowiatId==null
                                         ).ToListAsync();
         }
         #endregion

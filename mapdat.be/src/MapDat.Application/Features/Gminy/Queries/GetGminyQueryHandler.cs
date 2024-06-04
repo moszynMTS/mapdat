@@ -16,13 +16,14 @@ namespace MapDat.Application.Features.Gminy.Queries
             : base(mongoService) { }
         public async override Task<BaseResponse<IEnumerable<GminyViewModel>>> Handle(GetGminyQuery request,CancellationToken cancellationToken)
         {
-            var entities = await _mongoService.GetGminy(request.Powiat);
+            var entities = await _mongoService.GetGminy(request.Powiat, request.PowiatId);
             var result = new List<GminyViewModel>();
+			await test();
             foreach (var entity in entities)
                 result.Add(new GminyViewModel(entity));
             return new BaseResponse<IEnumerable<GminyViewModel>>(statusCode: HttpStatusCode.OK,content: result);
         }
-    public async Task<BaseResponse<IEnumerable<GminyViewModel>>> test(GetGminyQuery request, CancellationToken cancellationToken)
+    public async Task<BaseResponse<IEnumerable<GminyViewModel>>> test()
         {
             var data = "{"+
 "\"66378ed778d59e64a283a44e\":["+
@@ -107,7 +108,24 @@ namespace MapDat.Application.Features.Gminy.Queries
 	"\"6640f88b9fa55774df6e21d5\"," +
 	"\"6640f88b9fa55774df6e21d8\"" +
 	"]}";
-            var dictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(data);
+
+			var data2 = "{" +
+"\"66378ed778d59e64a283a450\":[" +
+    "\"6640f88c9fa55774df6e249e\"," +
+    "\"6640f88b9fa55774df6e20dc\"," +
+    "\"6640f88c9fa55774df6e25bf\"," +
+    "\"6640f88c9fa55774df6e26ff\"," +
+    "\"6640f88c9fa55774df6e24ad\"," +
+    "\"6640f88b9fa55774df6e1fa5\"," +
+    "\"6640f88c9fa55774df6e25be\"," +
+    "\"6640f88c9fa55774df6e26fd\"," +
+    "\"6640f88c9fa55774df6e25c0\"," +
+    "\"6640f88b9fa55774df6e1fa4\"," +
+    "\"6640f88b9fa55774df6e22d1\"," +
+    "\"6640f88b9fa55774df6e2217\"," +
+    "\"6640f88c9fa55774df6e26fe\"" +
+    "]}";
+            var dictionary = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(data2);
 
             foreach (var kvp in dictionary)
             {

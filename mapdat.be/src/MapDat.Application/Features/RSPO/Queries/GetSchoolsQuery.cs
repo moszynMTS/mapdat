@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace MapDat.Application.Features.RSPO.Queries
 {
-    public class GetSchoolsQuery : BaseRequest<InfoViewModel>
+    public class GetSchoolsQuery : BaseRequest<IEnumerable<InfoViewModel>>
+    {
+        public IEnumerable<DataObject> Data = new List<DataObject>();
+    }
+    public class DataObject
     {
         public string Wojewodztwo { get; set; } = null!;
         public string? Powiat { get; set; }

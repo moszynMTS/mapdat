@@ -15,53 +15,55 @@ using Newtonsoft.Json.Linq;
 
 namespace MapDat.Application.Features.RSPO.Queries
 {
-    public class GetSchoolsQueryHandler : BaseQueryHandler<GetSchoolsQuery, InfoViewModel>
+    public class GetSchoolsQueryHandler : BaseQueryHandler<GetSchoolsQuery, IEnumerable<InfoViewModel>>
     {
         public GetSchoolsQueryHandler(IMongoService mongoService)
             : base(mongoService) { }
-        public async override Task<BaseResponse<InfoViewModel>> Handle(GetSchoolsQuery request, CancellationToken cancellationToken)
+        public async override Task<BaseResponse<IEnumerable<InfoViewModel>>> Handle(GetSchoolsQuery request, CancellationToken cancellationToken)
         {
             using (HttpClient client = new HttpClient())
             {
                 try
                 {
-                    string url = "https://api-rspo.mein.gov.pl/api/placowki/?";
-                    string propertiesWojewodztwo = $"wojewodztwo_nazwa={request.Wojewodztwo}";
-                    string propertiesPowiat = $"powiat_nazwa={request.Powiat}";
-                    string propertiesGmina = $"gmina_nazwa={request.Gmina}";
-                    url += propertiesWojewodztwo;
-                    if(request.Powiat!=null)
-                        url += $"&{propertiesPowiat}";
-                    if (request.Gmina != null)
-                        url += $"&{propertiesGmina}";
+                    var result = new List<InfoViewModel>();
+                    foreach(var item in request.Data)
+                    {
+                        string url = "https://api-rspo.mein.gov.pl/api/placowki/?";
+                        string propertiesWojewodztwo = $"wojewodztwo_nazwa={item.Wojewodztwo}";
+                        string propertiesPowiat = $"powiat_nazwa={item.Powiat}";
+                        string propertiesGmina = $"gmina_nazwa={item.Gmina}";
+                        url += propertiesWojewodztwo;
+                        if(item.Powiat!=null)
+                            url += $"&{propertiesPowiat}";
+                        if (item.Gmina != null)
+                            url += $"&{propertiesGmina}";
 
-                    HttpResponseMessage response = await client.GetAsync(url);
-                    response.EnsureSuccessStatusCode();
+                        HttpResponseMessage response = await client.GetAsync(url);
+                        response.EnsureSuccessStatusCode();
 
-                    string responseBody = await response.Content.ReadAsStringAsync();
+                        string responseBody = await response.Content.ReadAsStringAsync();
 
-                    JObject jsonResponse = JObject.Parse(responseBody);
-                    int totalItems = jsonResponse["hydra:totalItems"].Value<int>();
+                        JObject jsonResponse = JObject.Parse(responseBody);
+                        int totalItems = jsonResponse["hydra:totalItems"].Value<int>();
 
-                    var result = new InfoViewModel(request);
-                    result.Count= totalItems;
-                    result.Name = "placowki szkolne";
+                        result.Add(new InfoViewModel(item, result.Count, "placowki szkolne"));
+                    }
 
-                    return new BaseResponse<InfoViewModel>(statusCode: HttpStatusCode.OK, content: result);
+                    return new BaseResponse<IEnumerable<InfoViewModel>>(statusCode: HttpStatusCode.OK, content: result);
                 }
                 catch (HttpRequestException e)
                 {
                     // Obsłuż wyjątki związane z zapytaniem HTTP
                     Console.WriteLine("\nException Caught!");
                     Console.WriteLine("Message :{0} ", e.Message);
-                    return new BaseResponse<InfoViewModel>(statusCode: HttpStatusCode.BadRequest, content: null, error:"rspo request failed");
+                    return new BaseResponse<IEnumerable<InfoViewModel>>(statusCode: HttpStatusCode.BadRequest, content: null, error:"rspo request failed");
                 }
                 catch (Exception e)
                 {
                     // Obsłuż wyjątki związane z zapytaniem HTTP
                     Console.WriteLine("\nException Caught!");
                     Console.WriteLine("Message :{0} ", e.Message);
-                    return new BaseResponse<InfoViewModel>(statusCode: HttpStatusCode.BadRequest, content: null, error:"rspo request failed");
+                    return new BaseResponse<IEnumerable<InfoViewModel>>(statusCode: HttpStatusCode.BadRequest, content: null, error:"rspo request failed");
                 }
             }
         }

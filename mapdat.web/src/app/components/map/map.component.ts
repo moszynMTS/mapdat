@@ -264,7 +264,7 @@ export class MapComponent implements AfterViewInit {
 
   getGminy(powiat: any, PowiatId: any){
     this.apiCaller.setControllerPath('Gminy');
-    this.apiCaller.getGminy(gmina).subscribe((res: any) => {
+    this.apiCaller.getGminy(powiat,PowiatId).subscribe((res: any) => {
       //this.disableMap(this.geoJSONLayer2);
       let list: any[] = [];
       res.content.forEach((x:any)=>{

@@ -147,7 +147,7 @@ export class MapComponent implements AfterViewInit {
           break;
           case 2:
             console.log("[G] ",feature.properties.name)
-            this.getGminy(feature.properties.name)
+            this.getGminy(feature.properties.name, feature.properties.id)
             break;
           case 3:
             console.log("[A] ",feature.properties.name, feature.properties.id)
@@ -202,9 +202,9 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  getGminy(gmina: any){
+  getGminy(powiat: any, PowiatId: any){
     this.apiCaller.setControllerPath('Gminy');
-    this.apiCaller.getGminy(gmina).subscribe((res: any) => {
+    this.apiCaller.getGminy(powiat,PowiatId).subscribe((res: any) => {
       this.disableMap(this.geoJSONLayer2);
       let list: any[] = [];
       res.content.forEach((x:any)=>{

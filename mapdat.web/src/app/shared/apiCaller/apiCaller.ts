@@ -31,8 +31,8 @@ export class ApiCaller {
         return this.http.get<any>(this.APIUrl + this.typeName+"/ById", {params: payload});
     }
 
-    getGminy(Powiat: any): Observable<any[]> {
-        const payload = { Powiat };
+    getGminy(Powiat: any, PowiatId: any): Observable<any[]> {
+        const payload = { Powiat, PowiatId };
         return this.http.get<any>(this.APIUrl + this.typeName, {params: payload});
     }
 

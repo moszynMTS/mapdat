@@ -5,9 +5,18 @@
             <p style="padding-right: 1rem; margin: 0px;">Styl mapy</p>
             <button class="mapStyleSelector" *ngFor="let y of mapStrings; let i = index" (click)="setLayerView(i)">{{i}}</button>
         </div>
-        <button class="calculate" (click)="checkResult()">
-            Sprawdź
-        </button>
+        <div class="subject-selection">
+            <button class="calculate" (click)="checkResult()">
+                Sprawdź
+            </button>
+            <mat-form-field appearance="fill">
+                <mat-select id="subjectsSelect" multiple [(value)]="selectedSubjectNames">
+                <mat-option *ngFor="let subject of subjects" [value]="subject.name">
+                    {{subject.name}}
+                </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
         <!-- <div class="entity" *ngFor="let x of voivodeshipsList">
             <p class="title" (click)="getPowiaty(x?.properties.name)">{{ x?.properties.name | capitalizeFirstLetter }}</p>
         </div> -->

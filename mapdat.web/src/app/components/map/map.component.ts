@@ -40,7 +40,24 @@ export class MapComponent implements AfterViewInit {
   public wojewodztwaList: any[] = [];
   public powiatyList: any[] = [];
   public gminyList: any[] = [];
-  public subjects: any[] = [];
+  public subjects: any[] = [
+    {id: 1, name: "Dochody powiatów według województwa"},
+    {id: 2, name: "Wydatki powiatów według województwa"}, 
+    {id: 3, name: "Ludność według województw"},
+    {id: 4, name: "Mediana wieku według województw"},
+    {id: 5, name: "Przestępstwa według województw"},
+    {id: 6, name: "Biblioteki publiczne według województw"},
+    {id: 7, name: "Kina według województw"},
+    {id: 8, name: "Kluby sportowe według województw"},
+    {id: 9, name: "Gastronomia według województw"},
+    {id: 10, name: "Szpitale według województw"},
+    {id: 11, name: "Żłobki według województw"},
+    {id: 12, name: "Pracujący według województw"},
+    {id: 13, name: "Stopa bezrobocia według województw"},
+    {id: 14, name: "Szkoły według podziału administracyjnego"},
+];
+
+  public selectedSubjectNames: string[] = [];
 
   private tileLayer: any;
   constructor(private apiCaller: ApiCaller) {
@@ -333,9 +350,10 @@ export class MapComponent implements AfterViewInit {
       this.gminyList,
       this.subjects
     ];
-    console.log(sending);
+    console.log(sending, this.selectedSubjectNames);
     this.apiCaller.getSchools(sending).subscribe((res: any) => {
-      console.log("RES", res);
+      console.log("RES", res)
+      alert(res);
     })
   }
 }

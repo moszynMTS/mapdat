@@ -6,6 +6,9 @@ import { MapComponent } from './components/map/map.component';
 import { ApiCaller } from './shared/apiCaller/apiCaller';
 import { HttpClientModule } from '@angular/common/http';
 import { CapitalizeFirstLetterPipe } from '../assets/pipes/capitalize-first-letter.pipe';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,11 @@ import { CapitalizeFirstLetterPipe } from '../assets/pipes/capitalize-first-lett
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
+    MatSelectModule
   ],
   providers: [    
     ApiCaller,

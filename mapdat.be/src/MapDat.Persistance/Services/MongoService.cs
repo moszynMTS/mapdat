@@ -10,6 +10,7 @@ namespace MapDat.Persistance.Services
         private readonly IMongoCollection<WojewodztwoEntity> _wojewodztwa;
         private readonly IMongoCollection<PowiatEntity> _powiaty;
         public readonly IMongoCollection<GminaEntity> _gminy;
+        public readonly IMongoCollection<InfoEntity> _info;
         public MongoService(IMongoDBSettings settings, IMongoClient mongoClient) 
         {
             var CollectionNamesList = settings.CollectionNames.Split(';').ToList();
@@ -17,6 +18,7 @@ namespace MapDat.Persistance.Services
             _wojewodztwa = _database.GetCollection<WojewodztwoEntity>(CollectionNamesList[0]);
             _powiaty = _database.GetCollection<PowiatEntity>(CollectionNamesList[1]);
             _gminy = _database.GetCollection<GminaEntity>(CollectionNamesList[2]);
+            _info = _database.GetCollection<InfoEntity>(CollectionNamesList[3]);
         }
         #region GeoObjectsGets
         public IMongoCollection<GminaEntity> getGmina()
@@ -60,5 +62,10 @@ namespace MapDat.Persistance.Services
                                         ).ToListAsync();
         }
         #endregion
+        public InfoEntity GetInfo(string wojewodztwoId)
+        {
+
+            return _info.Find(x => x.WojewodztwoId == wojewodztwoId).First();
+        }
     }
 }

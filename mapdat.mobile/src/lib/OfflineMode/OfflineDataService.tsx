@@ -12,7 +12,6 @@ class OfflineDataService {
   async saveMapData(data: string, name: string) {
     try {
       const path = RNFS.DocumentDirectoryPath + "/" + name + ".json";
-      await RNFS.writeFile(path, "[]", "utf8");
       await RNFS.writeFile(path, JSON.stringify(data), "utf8");
     } catch (error) {
       console.error("Error saving mapData:", error);
@@ -52,8 +51,8 @@ class OfflineDataService {
   async clearMapData(name: string) {
     try {
       const path = RNFS.DocumentDirectoryPath + "/" + name + ".json";
-      await RNFS.writeFile(path, "[]", "utf8");
-      console.info("Delete: " + name + " succes");
+      await RNFS.writeFile(path, "{}", "utf8");
+      console.info("Cleared: " + name + " succes");
     } catch (error) {
       console.error("Error delete taskQueue:", error);
     }

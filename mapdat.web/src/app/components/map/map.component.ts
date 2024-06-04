@@ -1,8 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { EOVERFLOW } from 'constants';
 import * as L from 'leaflet';
 import { ApiCaller } from 'src/app/shared/apiCaller/apiCaller';
-import { GeoObjects } from 'src/app/shared/apiCaller/interfaces';
 
 @Component({
   selector: 'app-map',
@@ -39,6 +37,9 @@ export class MapComponent implements AfterViewInit {
   public geoJSONLayer2: any; //powiaty
   public geoJSONLayer3: any; //gminy
   public voivodeshipsList: any[] = [];
+  public wojewodztwaList: any[] = [];
+  public powiatyList: any[] = [];
+  public gminyList: any[] = [];
 
   private tileLayer: any;
   constructor(private apiCaller: ApiCaller) {
@@ -83,55 +84,91 @@ export class MapComponent implements AfterViewInit {
       "type": "FeatureCollection",
       "features": list
     };
+    const onMouseOver = (feature: any, map: L.Map) => (e: any) => {
+      var content = '<div class="custom-popup-content">' + feature.properties.name + '</div>';
+      L.popup({ closeButton: false }) 
+       .setLatLng(e.latlng)
+       .setContent(content)
+       .openOn(map);
+    };
+  
+    const onMouseOut = () => (layer: any) => {
+      layer._popup && layer._popup.remove();
+    };
+
     switch(layers){
       case 1:
         this.geoJSONLayer1 = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
           style: {
-            fillColor: 'rgba(29, 136, 229, 0.3)',
+            fillColor: 'rgba(128, 128, 128, 0.3)',
             weight: 2,
             opacity: 1,
-            color: 'rgba(29, 136, 229, 1)',
+            color: 'rgba(128, 128, 128, 1)', 
             dashArray: '3',
-            fillOpacity: 0.7
+            fillOpacity: 0.5
           },
           onEachFeature: (feature: any, layer: any) => {
-            layer.on('click', () => {
-              this.onClickFeature(feature, layers);
-            });
+            layer.on('click', (e: any) => {
+              if (e.originalEvent.button === 0) { //lpm
+                  this.onClickFeature(feature, layers);
+              }
+              });
+              layer.on('contextmenu', (e: any) => {
+                  e.originalEvent.preventDefault();
+                  this.onRightClickFeature(feature, layers);  //ppm
+              });
+              layer.on('mouseover', onMouseOver(feature, this.map));
+              layer.on('mouseout', onMouseOut());
           }
         }).addTo(this.map);
         break;
       case 2:
         this.geoJSONLayer2 = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
           style: {
-            fillColor: 'rgba(29, 136, 229, 0.3)',
+            fillColor: 'rgba(128, 128, 128, 0.3)',
             weight: 2,
             opacity: 1,
-            color: 'rgba(29, 136, 229, 1)',
+            color: 'rgba(128, 128, 128, 1)', 
             dashArray: '3',
-            fillOpacity: 0.7
+            fillOpacity: 0.5
           },
           onEachFeature: (feature: any, layer: any) => {
-            layer.on('click', () => {
-              this.onClickFeature(feature, layers);
-            });
+            layer.on('click', (e: any) => {
+              if (e.originalEvent.button === 0) { //lpm
+                  this.onClickFeature(feature, layers);
+              }
+              });
+              layer.on('contextmenu', (e: any) => {
+                  e.originalEvent.preventDefault();
+                  this.onRightClickFeature(feature, layers);  //ppm
+              });
+              layer.on('mouseover', onMouseOver(feature, this.map));
+              layer.on('mouseout', onMouseOut());
           }
         }).addTo(this.map);
         break;
       case 3:
         this.geoJSONLayer2 = L.geoJSON(JSON.parse(JSON.stringify(tmp)), {
           style: {
-            fillColor: 'rgba(29, 136, 229, 0.3)',
+            fillColor: 'rgba(128, 128, 128, 0.3)',
             weight: 2,
             opacity: 1,
-            color: 'rgba(29, 136, 229, 1)',
+            color: 'rgba(128, 128, 128, 1)', 
             dashArray: '3',
-            fillOpacity: 0.7
+            fillOpacity: 0.5
           },
           onEachFeature: (feature: any, layer: any) => {
-            layer.on('click', () => {
-              this.onClickFeature(feature, layers);
-            });
+            layer.on('click', (e: any) => {
+              if (e.originalEvent.button === 0) { //lpm
+                  this.onClickFeature(feature, layers);
+              }
+              });
+              layer.on('contextmenu', (e: any) => {
+                  e.originalEvent.preventDefault();
+                  this.onRightClickFeature(feature, layers);  //ppm
+              });
+              layer.on('mouseover', onMouseOver(feature, this.map));
+              layer.on('mouseout', onMouseOut());
           }
         }).addTo(this.map);
         break;
@@ -152,6 +189,29 @@ export class MapComponent implements AfterViewInit {
           case 3:
             console.log("[A] ",feature.properties.name, feature.properties.id)
           break;
+      }
+    }
+  }
+
+  private onRightClickFeature(feature: any, layers: number) {
+    if (feature.properties && feature.properties.name) {
+      let item = {id: feature.properties.id, name: feature.properties.name}
+      switch(layers){
+        case 1:
+          if (!this.wojewodztwaList.some(x => x?.id === item?.id)) { //check if entity is unique
+              this.wojewodztwaList.push(item);
+          }
+        break;
+        case 2:
+          if (!this.powiatyList.some(x => x?.id === item?.id)) {
+            this.powiatyList.push(item);
+          }
+          break;
+        case 3:
+          if (!this.gminyList.some(x => x?.id === item?.id)) { 
+            this.gminyList.push(item);
+          }
+        break;
       }
     }
   }
@@ -193,7 +253,7 @@ export class MapComponent implements AfterViewInit {
   getPowiaty(powiat: any){
     this.apiCaller.setControllerPath('Powiaty');
     this.apiCaller.getPowiaty(powiat).subscribe((res: any) => {
-      this.disableMap(this.geoJSONLayer1);
+      //this.disableMap(this.geoJSONLayer1);
       let list: any[] = [];
       res.content.forEach((x:any)=>{
         list.push(this.addGeoJSONLayer(x));
@@ -204,8 +264,8 @@ export class MapComponent implements AfterViewInit {
 
   getGminy(powiat: any, PowiatId: any){
     this.apiCaller.setControllerPath('Gminy');
-    this.apiCaller.getGminy(powiat,PowiatId).subscribe((res: any) => {
-      this.disableMap(this.geoJSONLayer2);
+    this.apiCaller.getGminy(gmina).subscribe((res: any) => {
+      //this.disableMap(this.geoJSONLayer2);
       let list: any[] = [];
       res.content.forEach((x:any)=>{
         list.push(this.addGeoJSONLayer(x));
@@ -220,7 +280,7 @@ export class MapComponent implements AfterViewInit {
     }
   }
   
-  private disableMap(layer: any) { //set layers to gray
+  private disableMap(layer: any) { //set layers to gray, deprecated
     if (layer) {
       layer.setStyle({
         fillColor: 'rgba(128, 128, 128, 0.3)',
@@ -232,10 +292,49 @@ export class MapComponent implements AfterViewInit {
       });
     }
   }
+  private enableMap(layer: any) { //set layer to blue
+    if (layer) {
+      layer.setStyle({
+        fillColor: 'rgba(29, 136, 229, 0.3)',
+        weight: 2,
+        opacity: 1,
+        color: 'rgba(29, 136, 229, 1)',
+        dashArray: '3',
+        fillOpacity: 0.7
+      });
+    }
+  }
 
   setLayerView(newMap: number){
     this.usedMap = newMap;
     this.changeTileLayer();
   }
 
+  removeFromList(list: number, id: string) {
+    switch(list){
+      case 1:
+        this.wojewodztwaList = this.wojewodztwaList.filter(item => item.id !== id);
+        break;
+      case 2:
+        this.powiatyList = this.powiatyList.filter(item => item.id !== id);
+        break;
+      case 3:
+        this.gminyList = this.gminyList.filter(item => item.id !== id);
+        break;
+    }
+  }
+
+  checkResult(){
+    this.apiCaller.setControllerPath('Result');
+    let sending: any[] = [
+      {type: 0, content: this.wojewodztwaList},
+      {type: 1, content: this.powiatyList},
+      {type: 2, content: this.gminyList}
+    ];
+    console.log(sending);
+    return;
+    this.apiCaller.getResult(sending).subscribe((res: any) => {
+      console.log("RES", res);
+    })
+  }
 }

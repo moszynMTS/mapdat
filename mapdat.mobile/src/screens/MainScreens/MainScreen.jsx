@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { HeaderView } from "../../components/HeaderView";
+import { HeaderView } from "../../components/layouts/HeaderView";
 import { Map } from "../../components/Map";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";

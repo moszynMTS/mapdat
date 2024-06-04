@@ -40,5 +40,10 @@ export class ApiCaller {
         const payload = { id };
         return this.http.get<any>(this.APIUrl + this.typeName+"/ById", {params: payload});
     }
+
+    getResult(data: any[]): Observable<any[]> {
+        const params = new HttpParams().set('data', JSON.stringify(data));
+        return this.http.get<any[]>(this.APIUrl + this.typeName, {params: params});
+    }
       
 }

@@ -23,8 +23,6 @@ export const Map = () => {
           dispatchParamName({name: capitalizeFirstLetter(feature.properties.name)});
           setLayers((prevData) => prevData + 1);
         break;
-        case 3:
-        break;
       }
     }
   }

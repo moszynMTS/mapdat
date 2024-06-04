@@ -11,6 +11,7 @@ body {
 .menu{
     // background-color: #def;
     width: 20vw;
+    padding-left: 10px;
 }
 .title{
     width: 100%;
@@ -81,4 +82,24 @@ body {
 }
 .calculate:hover{
     background-color: rgb(25, 125, 212);
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    padding: 0px !important;
+    border-radius: 5px !important;
+}
+.mat-form-field-infix {
+    padding: .5em 0;
+    border-top: .5em solid transparent;
+    width: 13rem;
+}
+.mat-form-field-appearance-fill .mat-form-field-infix {
+    padding: .25em 0 .25em 0;
+}
+.mat-form-field-wrapper {
+    margin-left: 5rem;
+}
+.mat-select-value-text{
+    padding: 5px;
 }

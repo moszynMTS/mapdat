@@ -40,6 +40,24 @@ export class MapComponent implements AfterViewInit {
   public wojewodztwaList: any[] = [];
   public powiatyList: any[] = [];
   public gminyList: any[] = [];
+  public subjects: any[] = [
+    {id: 1, name: "Dochody powiatów według województwa"},
+    {id: 2, name: "Wydatki powiatów według województwa"}, 
+    {id: 3, name: "Ludność według województw"},
+    {id: 4, name: "Mediana wieku według województw"},
+    {id: 5, name: "Przestępstwa według województw"},
+    {id: 6, name: "Biblioteki publiczne według województw"},
+    {id: 7, name: "Kina według województw"},
+    {id: 8, name: "Kluby sportowe według województw"},
+    {id: 9, name: "Gastronomia według województw"},
+    {id: 10, name: "Szpitale według województw"},
+    {id: 11, name: "Żłobki według województw"},
+    {id: 12, name: "Pracujący według województw"},
+    {id: 13, name: "Stopa bezrobocia według województw"},
+    {id: 14, name: "Szkoły według podziału administracyjnego"},
+];
+
+  public selectedSubjectNames: string[] = [];
 
   private tileLayer: any;
   constructor(private apiCaller: ApiCaller) {
@@ -184,7 +202,7 @@ export class MapComponent implements AfterViewInit {
           break;
           case 2:
             console.log("[G] ",feature.properties.name)
-            this.getGminy(feature.properties.name)
+            this.getGminy(feature.properties.name, feature.properties.id)
             break;
           case 3:
             console.log("[A] ",feature.properties.name, feature.properties.id)
@@ -262,9 +280,9 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
-  getGminy(gmina: any){
+  getGminy(powiat: any, PowiatId: any){
     this.apiCaller.setControllerPath('Gminy');
-    this.apiCaller.getGminy(gmina).subscribe((res: any) => {
+    this.apiCaller.getGminy(powiat,PowiatId).subscribe((res: any) => {
       //this.disableMap(this.geoJSONLayer2);
       let list: any[] = [];
       res.content.forEach((x:any)=>{
@@ -325,16 +343,17 @@ export class MapComponent implements AfterViewInit {
   }
 
   checkResult(){
-    this.apiCaller.setControllerPath('Result');
-    let sending: any[] = [
-      {type: 0, content: this.wojewodztwaList},
-      {type: 1, content: this.powiatyList},
-      {type: 2, content: this.gminyList}
+    this.apiCaller.setControllerPath('RSPO');
+    let sending: string[][] = [
+      this.wojewodztwaList,
+      this.powiatyList,
+      this.gminyList,
+      this.subjects
     ];
-    console.log(sending);
-    return;
-    this.apiCaller.getResult(sending).subscribe((res: any) => {
-      console.log("RES", res);
+    console.log(sending, this.selectedSubjectNames);
+    this.apiCaller.getSchools(sending).subscribe((res: any) => {
+      console.log("RES", res)
+      alert(res);
     })
   }
 }

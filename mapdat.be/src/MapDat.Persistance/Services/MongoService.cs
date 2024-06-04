@@ -9,7 +9,7 @@ namespace MapDat.Persistance.Services
         private readonly IMongoDatabase _database;
         private readonly IMongoCollection<WojewodztwoEntity> _wojewodztwa;
         private readonly IMongoCollection<PowiatEntity> _powiaty;
-        private readonly IMongoCollection<GminaEntity> _gminy;
+        public readonly IMongoCollection<GminaEntity> _gminy;
         public MongoService(IMongoDBSettings settings, IMongoClient mongoClient) 
         {
             var CollectionNamesList = settings.CollectionNames.Split(';').ToList();
@@ -19,6 +19,10 @@ namespace MapDat.Persistance.Services
             _gminy = _database.GetCollection<GminaEntity>(CollectionNamesList[2]);
         }
         #region GeoObjectsGets
+        public IMongoCollection<GminaEntity> getGmina()
+        {
+            return _gminy;
+        }
         public WojewodztwoEntity GetWojewodztwo(string id)
         {
             return _wojewodztwa.Find(x => x.Id==id).FirstOrDefault();
@@ -46,9 +50,14 @@ namespace MapDat.Persistance.Services
         {
             return _gminy.Find(x => x.Id == id).FirstOrDefault();
         }
-        public async Task<List<GminaEntity>> GetGminy(string powiat)
+        public async Task<List<GminaEntity>> GetGminy(string powiat, string powiatId)
         {
-            return await _gminy.Find(x => x.Properties.Powiat.ToLower() == powiat.ToLower()).ToListAsync();
+            var byId = await _gminy.Find(x => x.Properties.PowiatId == powiatId
+                                        ).ToListAsync();
+            if (byId.Count > 0)
+                return byId;
+            return await _gminy.Find(x => x.Properties.Powiat.ToLower() == powiat.ToLower() && x.Properties.PowiatId==null
+                                        ).ToListAsync();
         }
         #endregion
     }

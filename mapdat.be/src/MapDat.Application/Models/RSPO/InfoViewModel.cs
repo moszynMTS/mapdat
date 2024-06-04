@@ -13,11 +13,13 @@ namespace MapDat.Application.Models.RSPO
         {
             
         }
-        public InfoViewModel(GetSchoolsQuery query)
+        public InfoViewModel(DataObject query, int count, string name)
         {
             Wojewodztwo = query.Wojewodztwo;
             Powiat = query.Powiat;
             Gmina = query.Gmina;
+            Count = count;
+            Name = name;
         }
         public string Wojewodztwo { get; set; } = null!;
         public string? Powiat { get; set; }

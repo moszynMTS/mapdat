@@ -1,17 +1,17 @@
-export const MapHtmlContent = (tmp: any, layers: number)  => {
-    /*
-  marker.on('drag', () => {
-          const markerLatLng = marker.getLatLng();
-          radius.setLatLng(markerLatLng, ${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568});
-          window.ReactNativeWebView.postMessage(JSON.stringify(markerLatLng));
-        });
-  
-        marker.on('dragend', () => {
-          const markerLatLng = marker.getLatLng();
-          window.ReactNativeWebView.postMessage(JSON.stringify({ markerLatLng, lastCoords: true }));
-        });
-    */
-   let test = `var data = {"type":"FeatureCollection", "features": ${JSON.stringify(tmp)} };`
+export const MapHtmlContent = (tmp: any, layers: number) => {
+  /*
+marker.on('drag', () => {
+        const markerLatLng = marker.getLatLng();
+        radius.setLatLng(markerLatLng, ${lat != null ? lat :50.866077}, ${ lon != null ? lon : 20.628568});
+        window.ReactNativeWebView.postMessage(JSON.stringify(markerLatLng));
+      });
+ 
+      marker.on('dragend', () => {
+        const markerLatLng = marker.getLatLng();
+        window.ReactNativeWebView.postMessage(JSON.stringify({ markerLatLng, lastCoords: true }));
+      });
+  */
+  let test = `var data = {"type":"FeatureCollection", "features": ${JSON.stringify(tmp)} };`
   return `
   <!DOCTYPE html>
   <html>
@@ -66,5 +66,4 @@ export const MapHtmlContent = (tmp: any, layers: number)  => {
     </body>
   </html>
   `;
-  };
-    
+};

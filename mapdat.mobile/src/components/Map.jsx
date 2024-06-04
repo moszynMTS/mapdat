@@ -6,27 +6,37 @@ import GeoJSONCaller from "../features/services/GeoJSONCaller";
 import { useEffect, useReducer, useState } from "react";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
-export const Map = () => {
-  const [layers, setLayers] = useState(1);
+export const Map = ({layer, setLayer, saveGmina, saveLayer}) => {
+
   const [params, dispatchParamName] = useReducer((state, action) => ({...state, ...action}), name = "");
-  const geoJsonWoj = GeoJSONCaller.getRequest(layers, params.name);
+  const geoJsonWoj = GeoJSONCaller.getRequest(layer, params.name);
   const [data, setData] = useState(null);
 
-  const onClickFeature = ({feature, layers}) => {
+  const onClickFeature = ({feature, layer}) => {
+    console.log(layer);
     if (feature.properties && feature.properties.name) {
-      switch(layers){
+      switch(layer){
         case 1:
           dispatchParamName({name: capitalizeFirstLetter(feature.properties.name)});
-          setLayers((prevData) => prevData + 1);
+          setLayer((prev) => prev + 1);
+
         break;
         case 2:
           dispatchParamName({name: capitalizeFirstLetter(feature.properties.name)});
-          setLayers((prevData) => prevData + 1);
+          setLayer((prev) => prev + 1);
         break;
       }
     }
   }
-
+  
+  useEffect(() => {
+    if(layer >=3)
+      {
+        saveLayer(params.name, data)
+      }
+  }, [saveGmina])
+  
+  
   useEffect(() => {
     if(geoJsonWoj.isSuccess)
     {
@@ -51,19 +61,19 @@ export const Map = () => {
             borderRadius: 20,
             alignSelf: "center",
           }}
-          key={layers}
+          key={layer}
         >
           <WebView
             nestedScrollEnabled={true}
             originWhitelist={["*"]}
             source={{
-              html: MapHtmlContent(JSON.stringify(data), layers),
+              html: MapHtmlContent(JSON.stringify(data), layer),
             }}            
             style={{ flex: 1, opacity: 0.99 }}
             javaScriptEnabled
             onMessage={(event) => {
               const data = JSON.parse(event.nativeEvent.data)
-              onClickFeature({feature: data.feature, layers: data.layers})
+              onClickFeature({feature: data.feature, layer: data.layers})
             }}
           />
         </View>

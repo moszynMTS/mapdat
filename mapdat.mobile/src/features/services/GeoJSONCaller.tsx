@@ -11,7 +11,7 @@ class GeoJSONCaller {
         this.geoJsonUtils = new GeoJsonUtil();
     }
     public getRequest(layer: number, optionalParam: string | undefined){
-        console.log(optionalParam);
+        // console.log(optionalParam);
         switch(layer)
         {
             case 1:

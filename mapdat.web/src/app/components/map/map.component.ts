@@ -40,6 +40,7 @@ export class MapComponent implements AfterViewInit {
   public wojewodztwaList: any[] = [];
   public powiatyList: any[] = [];
   public gminyList: any[] = [];
+  public subjects: any[] = [];
 
   private tileLayer: any;
   constructor(private apiCaller: ApiCaller) {
@@ -325,15 +326,15 @@ export class MapComponent implements AfterViewInit {
   }
 
   checkResult(){
-    this.apiCaller.setControllerPath('Result');
-    let sending: any[] = [
-      {type: 0, content: this.wojewodztwaList},
-      {type: 1, content: this.powiatyList},
-      {type: 2, content: this.gminyList}
+    this.apiCaller.setControllerPath('RSPO');
+    let sending: string[][] = [
+      this.wojewodztwaList,
+      this.powiatyList,
+      this.gminyList,
+      this.subjects
     ];
     console.log(sending);
-    return;
-    this.apiCaller.getResult(sending).subscribe((res: any) => {
+    this.apiCaller.getSchools(sending).subscribe((res: any) => {
       console.log("RES", res);
     })
   }

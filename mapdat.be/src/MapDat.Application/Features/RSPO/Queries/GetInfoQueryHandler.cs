@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace MapDat.Application.Features.RSPO.Queries
 {
-    public class GetInfoQueryHandler : BaseQueryHandler<GetSchoolsQuery, IEnumerable<InfoViewModel>>
+    public class GetInfoQueryHandler : BaseQueryHandler<GetInfoQuery, IEnumerable<InfoViewModel>>
     {
         public GetInfoQueryHandler(IMongoService mongoService)
             : base(mongoService) { }
 
-        public override Task<BaseResponse<IEnumerable<InfoViewModel>>> Handle(GetSchoolsQuery request, CancellationToken cancellationToken)
+        public override Task<BaseResponse<IEnumerable<InfoViewModel>>> Handle(GetInfoQuery request, CancellationToken cancellationToken)
         {
             throw new NotImplementedException();
         }

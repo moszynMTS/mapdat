@@ -32,6 +32,9 @@ body {
         border: 0px;
     }
 }
+.title2{
+    font-size: 1.2rem
+}
 .entity:hover{
     background-color: var(--tile2);
 }
@@ -46,4 +49,36 @@ body {
 }
 .mapStyleSelector:hover{
     background-color: var(--background);
+}
+
+.custom-popup-content {
+    opacity: 0.7;
+    background-color: #333;
+    color: white;
+    padding: 10px; 
+    border-radius: 5px;
+    font-size: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+
+.leaflet-popup-tip-container{
+    display: none
+}
+.leaflet-popup-content-wrapper{
+    background: rgba(0, 0, 0, 0);
+    box-shadow: none;
+}
+
+.calculate{
+    background-color: rgba(29, 136, 229, 1);
+    color: white;
+    font-size: 1rem;
+    padding: 0.3rem;
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+.calculate:hover{
+    background-color: rgb(25, 125, 212);
 }

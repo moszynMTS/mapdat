@@ -13,10 +13,6 @@ namespace MapDat.API.Controllers
     public class RSPOController : BaseApiController
     {
         [HttpGet]
-        public async Task<ActionResult<BaseResponse<IEnumerable<InfoViewModel>>>> GetSchools([FromQuery] GetSchoolsQuery request) =>
-            await Mediator.Send(request);
-
-        [HttpGet]
         public async Task<ActionResult<BaseResponse<IEnumerable<InfoViewModel>>>> GetInfo([FromQuery] GetInfoQuery request) =>
             await Mediator.Send(request);
     }

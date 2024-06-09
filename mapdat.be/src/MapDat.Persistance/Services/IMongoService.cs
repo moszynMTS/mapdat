@@ -14,5 +14,6 @@ namespace MapDat.Persistance.Services
         public Task UpdatePowiaty(string[] powiaty, string woj);
         public GminaEntity GetGmina(string id);
         public Task<List<GminaEntity>> GetGminy(string powiat, string powiatId);
+        public InfoEntity GetInfo(string wojewodztwoId);
     }
 }

@@ -41,8 +41,21 @@ export class ApiCaller {
         return this.http.get<any>(this.APIUrl + this.typeName+"/ById", {params: payload});
     }
 
-    getSchools(data: any[]): Observable<any[]> {
-        const params = new HttpParams().set('data', JSON.stringify(data));
+    getInfo(data: any[]): Observable<any[]> {
+        let params = new HttpParams();
+        data[0].forEach((item: string) => {
+            params = params.append('wojewodztwa', item);
+        });
+        data[1].forEach((item: string) => {
+            params = params.append('powiaty', item);
+        });
+        data[2].forEach((item: string) => {
+            params = params.append('gminy', item);
+        });
+        data[3].forEach((item: string) => {
+            params = params.append('subjects', item);
+        });
+            console.log(data)
         return this.http.get<any[]>(this.APIUrl + this.typeName, {params: params});
     }
       

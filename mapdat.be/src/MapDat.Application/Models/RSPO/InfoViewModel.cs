@@ -11,20 +11,16 @@ namespace MapDat.Application.Models.RSPO
     {
         public InfoViewModel()
         {
-            
         }
-        public InfoViewModel(DataObject query, int count, string name)
-        {
-            Wojewodztwo = query.Wojewodztwo;
-            Powiat = query.Powiat;
-            Gmina = query.Gmina;
-            Count = count;
-            Name = name;
-        }
-        public string Wojewodztwo { get; set; } = null!;
-        public string? Powiat { get; set; }
-        public string? Gmina { get; set; }
-        public int Count { get; set; }
-        public string Name { get; set; } = null!;
+        public string? WojewodztwoId { get; set; }
+        public string? PowiatId { get; set; }
+        public string? GminaId { get; set; }
+        public List<DataModel> Data { get; set; } = new List<DataModel>();
+        
+    }
+    public class DataModel
+    {
+        public string? Count { get; set; }
+        public string Subject { get; set; } = null!;
     }
 }

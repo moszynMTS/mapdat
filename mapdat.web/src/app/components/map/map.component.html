@@ -11,7 +11,7 @@
             </button>
             <mat-form-field appearance="fill">
                 <mat-select id="subjectsSelect" multiple [(value)]="selectedSubjectNames">
-                <mat-option *ngFor="let subject of subjects" [value]="subject.name">
+                <mat-option *ngFor="let subject of subjects" [value]="subject.value">
                     {{subject.name}}
                 </mat-option>
                 </mat-select>

@@ -6,7 +6,7 @@ import GeoJSONCaller from "../features/services/GeoJSONCaller";
 import { useEffect, useReducer, useState } from "react";
 import { capitalizeFirstLetter } from "../utils/capitalizeFirstLetter";
 
-export const Map = ({layer, setLayer, saveGmina, saveLayer}) => {
+export const Map = ({layer, setLayer, saveGmina, saveLayer, setSaveGmina}) => {
 
   const [params, dispatchParamName] = useReducer((state, action) => ({...state, ...action}), name = "");
   const geoJsonWoj = GeoJSONCaller.getRequest(layer, params.name);
@@ -30,9 +30,10 @@ export const Map = ({layer, setLayer, saveGmina, saveLayer}) => {
   }
   
   useEffect(() => {
-    if(layer >=3)
+    if(layer >=3 && saveGmina)
       {
         saveLayer(params.name, data)
+        setSaveGmina(false);
       }
   }, [saveGmina])
   

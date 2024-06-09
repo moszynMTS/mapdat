@@ -27,6 +27,7 @@
     "expo": "~50.0.14",
     "expo-build-properties": "~0.11.1",
     "expo-dev-client": "~3.3.11",
+    "expo-file-system": "~16.0.9",
     "expo-splash-screen": "^0.26.4",
     "expo-standard-web-crypto": "1.7.0",
     "expo-status-bar": "~1.11.1",
@@ -42,7 +43,8 @@
     "redux": "^5.0.1",
     "uuid": "9.0.1",
     "version": "^0.1.2",
-    "expo-file-system": "~16.0.9"
+    "react-native-gesture-handler": "~2.14.0",
+    "react-native-reanimated": "~3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

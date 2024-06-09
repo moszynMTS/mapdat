@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import MapDatApiCallerFactory from "../../services/base-api-caller/MapDatApiCallerFactory"
 import GeoJsonUtil from "../utils/geoJsonUtil";
+import OfflineDataService from "../../lib/OfflineMode/OfflineDataService";
 
 class GeoJSONCaller {
     private apiFactory: MapDatApiCallerFactory;
@@ -24,6 +25,14 @@ class GeoJSONCaller {
                 return this.getGminy(optionalParam);
             break
         }
+    }
+    public getMapData(name:string)
+    {
+        return this.getOfflineMapData(name);
+    }
+    public getListOfflineMap()
+    {
+        return this.getOfflineData();
     }
 
     private getWojewodztwa() {
@@ -52,6 +61,23 @@ class GeoJSONCaller {
             .getApiImplementation(`Gminy`)
             .getItem(`?Powiat=${powiatName}`)
             .then((x: any) => this.geoJsonUtils.transformGeoJsonToList(x.data))
+        })
+    }
+    private getOfflineData()
+    {
+        return useQuery({
+            queryKey: ['offline_data'],
+            queryFn: async () => await OfflineDataService.listJsonFiles(),
+            refetchOnWindowFocus: true,
+            enabled: false
+        })
+    }
+    private getOfflineMapData(name: string)
+    {
+        return useQuery({
+            queryKey: ['offline_JSON_data'],
+            queryFn: async () => await OfflineDataService.loadMapData(name),
+            refetchOnWindowFocus: true
         })
     }
 }

@@ -21,6 +21,7 @@ export const MainScreen = ({ navigation, route }) => {
                 styles={{ minHeight: 70 }}
                 refreshControl={() => {setResetKey(Math.random()); setLayer(1)}}
                 saveGmina={() => setSaveGmina(true)}
+                navigation={navigation}
               >
               </HeaderView>
             );
@@ -30,7 +31,7 @@ export const MainScreen = ({ navigation, route }) => {
 
     return(
         <View style={styles.container} key={resetKey}>
-        <Map layer={layer} setLayer={setLayer} saveGmina={saveGmina} saveLayer={saveLayer}/>
+        <Map layer={layer} setLayer={setLayer} saveGmina={saveGmina} saveLayer={saveLayer} setSaveGmina={() => setSaveGmina(false)}/>
         <StatusBar style="auto" />
       </View>
     )

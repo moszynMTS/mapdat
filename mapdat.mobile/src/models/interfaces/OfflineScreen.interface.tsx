@@ -1,8 +1,18 @@
 import { RouteProp } from '@react-navigation/native';
-// import { NativeStackNavigationProp } from '@react-navigation/drawer';
+import { DrawerContentComponentProps } from '@react-navigation/drawer';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type RootStackParamList ={
-    OfflineScreen: undefined
+    OfflinePage: undefined,
+    OfflineMap: {mapName: string}
 }
 
-//  type OfflineScreenNavigationProps 
+export type OfflineScreenNavigationProps = NativeStackNavigationProp<RootStackParamList, 'OfflinePage'> | NativeStackNavigationProp<RootStackParamList, 'OfflineMap'>;
+
+
+ type OfflineScreenRouteProp = RouteProp<RootStackParamList, 'OfflinePage'>
+
+ export interface OfflineScreenProps {
+    navigation: OfflineScreenNavigationProps,
+    route: OfflineScreenRouteProp
+ }

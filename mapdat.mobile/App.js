@@ -8,6 +8,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AppNavigator } from './src/screens/AppNavigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LayerProvider } from './src/states/context/LayerContext';
+import CustomAlertProvider from './src/components/layouts/CustomAlertProvider';
 
 const queryClient = new QueryClient();
 
@@ -47,12 +48,14 @@ export default function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <CustomAlertProvider>
 
-      <SafeAreaProvider>
-        <LayerProvider>
-          <AppNavigator onLayout={onLayoutRootView} />
-        </LayerProvider>
-      </SafeAreaProvider>
+        <SafeAreaProvider>
+          <LayerProvider>
+            <AppNavigator onLayout={onLayoutRootView} />
+          </LayerProvider>
+        </SafeAreaProvider>
+      </CustomAlertProvider>
     </QueryClientProvider>
   );
 }

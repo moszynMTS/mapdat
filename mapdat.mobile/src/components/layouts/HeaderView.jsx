@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View, Platform, SafeAreaView } from "react-native"
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { faArrowsRotate, faDownload } from '@fortawesome/free-solid-svg-icons';
+import { faArrowsRotate, faBars, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { SaveButton } from '../UI_design/SaveButton';
 import { useContext } from 'react';
 import { LayerContext } from '../../states/context/LayerContext';
@@ -10,10 +10,11 @@ import OfflineDataService from '../../lib/OfflineMode/OfflineDataService';
 export const HeaderView = ({
   title,
   children,
-  refreshControl,
+  refreshControl = null,
   styles,
   color = "#1e88e5",
-  saveGmina
+  saveGmina = null,
+  navigation
 }) => {
   const insets = useSafeAreaInsets();
 
@@ -29,8 +30,14 @@ export const HeaderView = ({
           style={{
             // paddingLeft: 10,
             flex: 1,
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-evenly"
           }}
         >
+          <TouchableOpacity    onPress={() => navigation.toggleDrawer()} >
+            <FontAwesomeIcon icon={faBars} size={25} color='white'/>
+          </TouchableOpacity>
           <Text style={HeaderStyles.headerTexts}>{title}</Text>
         </View>
       </View>
@@ -45,17 +52,19 @@ export const HeaderView = ({
         justifyContent: "space-evenly",
         flexDirection: "row"
       }}>
-        <SaveButton onPress={saveGmina} disabled={layer >= 3} />
-        <TouchableOpacity
-          onPress={refreshControl}
-        >
-          <FontAwesomeIcon
-            icon={faArrowsRotate}
-            color="white"
-            size={25}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
+        {saveGmina != null && <SaveButton onPress={saveGmina} disabled={layer >= 3} />}
+        {refreshControl != null &&
+          <TouchableOpacity
+            onPress={refreshControl}
+          >
+            <FontAwesomeIcon
+              icon={faArrowsRotate}
+              color="white"
+              size={25}
+            />
+          </TouchableOpacity>
+        }
+        {/* <TouchableOpacity
           onPress={async () => {console.log( await OfflineDataService.listJsonFiles())}}
         >
           <FontAwesomeIcon
@@ -63,7 +72,7 @@ export const HeaderView = ({
             color="white"
             size={25}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
     );
   };

@@ -3,7 +3,17 @@ import * as FileSystem from 'expo-file-system';
 class OfflineDataService {
   path: string;
   constructor() {
-    this.path = `${FileSystem.documentDirectory}/`;
+    this.path = `${FileSystem.documentDirectory}`;
+    this.createMainFile();
+  }
+
+  async createMainFile(){
+    FileSystem.getInfoAsync(`${FileSystem.documentDirectory}/layers.json`).then(async tmp => {
+      if(!tmp.exists)
+      {
+        await FileSystem.writeAsStringAsync(`${this.path}layers.json`, JSON.stringify({layersName: []}), { encoding: 'utf8' });
+      }
+    })
   }
 
   async getData(name: string) {
@@ -11,8 +21,22 @@ class OfflineDataService {
   }
 
   /* HANDLE FILE I/O */
+  async saveMapName(name:string)
+  {
+    try {
+      const path = `${this.path}layers.json`;
+      const storedData = await FileSystem.readAsStringAsync(path, { encoding: 'utf8' });
+      const parsedData = JSON.parse(storedData);
+      parsedData.layersName.push(name);
+      await FileSystem.writeAsStringAsync(path, JSON.stringify(parsedData), { encoding: 'utf8' });
+    } catch (error) {
+      console.error("Error saving mapData:", error);
+    }
+  }
+
   async saveMapData(data: string, name: string) {
     try {
+      this.saveMapName(name);
       const path = `${this.path}${name}.json`;
       await FileSystem.writeAsStringAsync(path, JSON.stringify(data), { encoding: 'utf8' });
       console.debug("SAVED");
@@ -21,25 +45,17 @@ class OfflineDataService {
     }
   }
 
-  async deleteMapData(name: string) {
-    const folderPath = `${this.path}${name}.json`;
-    try {
-      await FileSystem.deleteAsync(folderPath);
-      console.log("Folder został pomyślnie usunięty.");
-    } catch (error) {
-      console.error("Błąd podczas usuwania folderu:", error);
-    }
-  }
 
-  async listJsonFiles() {
-    try {
 
-      const files = await FileSystem.readDirectoryAsync(this.path);
-      const jsonFiles = files.filter(file => file.endsWith('.json')); // Filter for files ending with '.json'
-      return jsonFiles; // Return an array of JSON file names (without paths)
+  async listJsonFiles(): Promise<{ layersName: []; }> {
+    try { 
+      console.log("LIST");
+      const path = `${this.path}layers.json`;
+      const storedData = await FileSystem.readAsStringAsync(path, { encoding: 'utf8' });
+      return JSON.parse(storedData); 
     } catch (error) {
       console.error("Error listing JSON files:", error);
-      return []; // Return an empty array on error
+      return {layersName: []}; // Return an empty array on error
     }
   }
 
@@ -68,6 +84,31 @@ class OfflineDataService {
     } catch (error) {
       console.error("Error delete taskQueue:", error);
     }
+  }
+
+  private async deleteMapData(name: string) {
+    const folderPath = `${this.path}${name}.json`;
+    try {
+      await FileSystem.deleteAsync(folderPath);
+      console.log("Folder został pomyślnie usunięty.");
+    } catch (error) {
+      console.error("Błąd podczas usuwania folderu:", error);
+    }
+  }
+
+  async deleteMap(name:string){
+    try {
+      const path = `${this.path}layers.json`;
+      console.log(path)
+      const storedData = await FileSystem.readAsStringAsync(path, { encoding: 'utf8' });
+      const parsedData = JSON.parse(storedData);
+      parsedData.layersName.pop(name);
+      await FileSystem.writeAsStringAsync(path, JSON.stringify(parsedData), { encoding: 'utf8' });
+      // await this.deleteMapData(name);
+    } catch (error) {
+      console.error("Error deleting mapData:", error);
+    }
+
   }
 }
 

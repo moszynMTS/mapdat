@@ -20,7 +20,7 @@ namespace MapDat.Application.Features.RSPO.Queries
 
         public async override Task<BaseResponse<IEnumerable<InfoViewModel>>> Handle(GetInfoQuery request, CancellationToken cancellationToken)
         {
-            var type = typeof(WojewodztwoPropertiesObject);
+            var type = typeof(InfoEntity);
             var result = new List<InfoViewModel>();
             foreach (var id in request.Wojewodztwa)
             {
@@ -29,7 +29,8 @@ namespace MapDat.Application.Features.RSPO.Queries
                 item.WojewodztwoId = id;
                 foreach (var subject in request.Subjects)
                 {
-                    var property = type.GetProperty(subject);
+                    string formattedSubject = char.ToUpper(subject[0]) + subject.Substring(1).ToLower();
+                    var property = type.GetProperty(formattedSubject);
                     if (property != null)
                     {
                         var value = property.GetValue(info);
@@ -37,26 +38,26 @@ namespace MapDat.Application.Features.RSPO.Queries
                             item.Data.Add(new DataModel { Subject = subject, Count = value.ToString() });
                     }
                 }
-                if (request.Subjects.Contains("Szkoły"))
+                if (request.Subjects.Contains("SZKOLY"))
                 {
-                    item.Data.Add(new DataModel { Subject = "Szkoły", Count = await GetSchoolData(id, null, null) });
+                    item.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(id, null, null) });
                 }
                 result.Add(item);
             }
-            if (request.Subjects.Contains("Szkoły"))
+            if (request.Subjects.Contains("SZKOLY"))
             {
                 foreach (var id in request.Powiaty)
                 {
                     var item = new InfoViewModel();
                     item.PowiatId = id;
-                    item.Data.Add(new DataModel { Subject = "Szkoły", Count = await GetSchoolData(null, id, null) });
+                    item.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, id, null) });
                     result.Add(item);
                 }
                 foreach (var id in request.Gminy)
                 {
                     var item = new InfoViewModel();
                     item.GminaId = id;
-                    item.Data.Add(new DataModel { Subject = "Szkoły", Count = await GetSchoolData(null, null, id) });
+                    item.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, null, id) });
                     result.Add(item);
                 }
             }
@@ -67,7 +68,11 @@ namespace MapDat.Application.Features.RSPO.Queries
         {
             var result = "";
             if (wojewodztwoId != null)
-                result = _mongoService.GetWojewodztwo(wojewodztwoId).Properties.Name;
+            {
+                var item = _mongoService.GetWojewodztwo(wojewodztwoId).Properties.Name;
+                result = $"{item};;";
+
+            }
             if (powiatId != null)
             {
                 var item = _mongoService.GetPowiat(powiatId);
@@ -90,7 +95,7 @@ namespace MapDat.Application.Features.RSPO.Queries
                 {
                     string url = "https://api-rspo.mein.gov.pl/api/placowki/?";
                     string propertiesWojewodztwo = $"wojewodztwo_nazwa={list[0]}";
-                    string propertiesPowiat = $"powiat_nazwa={list[1]}";
+                    string propertiesPowiat = $"powiat_nazwa={list[1].ToLower().Replace("powiat ","")}";
                     string propertiesGmina = $"gmina_nazwa={list[2]}";
                     if (list[0] != "")
                         url += $"&{propertiesWojewodztwo}";

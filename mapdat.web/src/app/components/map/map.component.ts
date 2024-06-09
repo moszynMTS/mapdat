@@ -41,23 +41,23 @@ export class MapComponent implements AfterViewInit {
   public powiatyList: any[] = [];
   public gminyList: any[] = [];
   public subjects: any[] = [
-    {id: 1, name: "Dochody powiatów według województwa"},
-    {id: 2, name: "Wydatki powiatów według województwa"}, 
-    {id: 3, name: "Ludność według województw"},
-    {id: 4, name: "Mediana wieku według województw"},
-    {id: 5, name: "Przestępstwa według województw"},
-    {id: 6, name: "Biblioteki publiczne według województw"},
-    {id: 7, name: "Kina według województw"},
-    {id: 8, name: "Kluby sportowe według województw"},
-    {id: 9, name: "Gastronomia według województw"},
-    {id: 10, name: "Szpitale według województw"},
-    {id: 11, name: "Żłobki według województw"},
-    {id: 12, name: "Pracujący według województw"},
-    {id: 13, name: "Stopa bezrobocia według województw"},
-    {id: 14, name: "Szkoły według podziału administracyjnego"},
+    { id: 1, name: "Dochody powiatów według województwa", value: "DOCHODY" },
+    { id: 2, name: "Wydatki powiatów według województwa", value: "WYDATKI" },
+    { id: 3, name: "Ludność według województw", value: "LUDNOSC" },
+    { id: 4, name: "Mediana wieku według województw", value: "MEDIANA WIEKU" },
+    { id: 5, name: "Przestępstwa według województw", value: "PRZESTEPSTWA" },
+    { id: 6, name: "Biblioteki publiczne według województw", value: "BIBLIOTEKI PUBLICZNE" },
+    { id: 7, name: "Kina według województw", value: "KINA" },
+    { id: 8, name: "Kluby sportowe według województw", value: "KLUBY SPORTOWE" },
+    { id: 9, name: "Gastronomia według województw", value: "GASTRONOMIA" },
+    { id: 10, name: "Szpitale według województw", value: "SZPITALE" },
+    { id: 11, name: "Żłobki według województw", value: "ZLOBKI" },
+    { id: 12, name: "Pracujący według województw", value: "PRACUJACY" },
+    { id: 13, name: "Stopa bezrobocia według województw", value: "STOPA BEZROBOCIA" },
+    { id: 14, name: "Szkoły według podziału administracyjnego", value: "SZKOLY" }
 ];
 
-  public selectedSubjectNames: string[] = [];
+  public selectedSubjectNames: any[] = [];
 
   private tileLayer: any;
   constructor(private apiCaller: ApiCaller) {
@@ -348,9 +348,8 @@ export class MapComponent implements AfterViewInit {
       this.wojewodztwaList.map(x=>x.id),
       this.powiatyList.map(x=>x.id),
       this.gminyList.map(x=>x.id),
-      this.subjects.map(x=>x.id)
+      this.selectedSubjectNames
     ];
-    console.log(sending);
     this.apiCaller.getInfo(sending).subscribe((res: any) => {
         console.log("RES", res);
         alert(res);

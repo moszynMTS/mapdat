@@ -42,11 +42,20 @@ export class ApiCaller {
     }
 
     getInfo(data: any[]): Observable<any[]> {
-        let params = new HttpParams()
-            .set('wojewodztwa', JSON.stringify(data[0]))
-            .set('powiaty', JSON.stringify(data[1]))
-            .set('gminy', JSON.stringify(data[2]))
-            .set('subject', JSON.stringify(data[3]));
+        let params = new HttpParams();
+        data[0].forEach((item: string) => {
+            params = params.append('wojewodztwa', item);
+        });
+        data[1].forEach((item: string) => {
+            params = params.append('powiaty', item);
+        });
+        data[2].forEach((item: string) => {
+            params = params.append('gminy', item);
+        });
+        data[3].forEach((item: string) => {
+            params = params.append('subjects', item);
+        });
+            console.log(data)
         return this.http.get<any[]>(this.APIUrl + this.typeName, {params: params});
     }
       

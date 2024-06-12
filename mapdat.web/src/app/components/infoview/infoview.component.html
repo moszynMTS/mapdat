@@ -1,8 +1,13 @@
-<div>
-    <div *ngFor="let x of data; let i = index">
-        {{i}}
-        <span *ngFor="let y of x.data">
-            [{{y?.subject}}] {{y?.count}}
-        </span>  
-    </div>
-</div>
+<mat-accordion>
+    <mat-expansion-panel *ngFor="let x of data; let i = index">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span style="font-weight: 700">{{ i }}</span> 
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let y of x.data">
+        <p>{{getSubjectName(y?.subject)}} {{ y?.count }}</p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  

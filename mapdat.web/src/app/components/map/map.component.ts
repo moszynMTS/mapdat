@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import * as L from 'leaflet';
 import { ApiCaller } from 'src/app/shared/apiCaller/apiCaller';
+import { InfoviewComponent } from '../infoview/infoview.component';
 
 @Component({
   selector: 'app-map',
@@ -60,7 +62,7 @@ export class MapComponent implements AfterViewInit {
   public selectedSubjectNames: any[] = [];
 
   private tileLayer: any;
-  constructor(private apiCaller: ApiCaller) {
+  constructor(private apiCaller: ApiCaller, public dialog: MatDialog) {
   }
 
   ngAfterViewInit(): void {
@@ -351,8 +353,10 @@ export class MapComponent implements AfterViewInit {
       this.selectedSubjectNames
     ];
     this.apiCaller.getInfo(sending).subscribe((res: any) => {
-        console.log("RES", res);
-        alert(res);
+        this.dialog.open(InfoviewComponent, {
+          data: res?.content,
+          width: '600px'
+        });
     })
   }
 }

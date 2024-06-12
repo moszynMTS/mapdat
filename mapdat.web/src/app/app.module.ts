@@ -9,12 +9,15 @@ import { CapitalizeFirstLetterPipe } from '../assets/pipes/capitalize-first-lett
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InfoviewComponent } from './components/infoview/infoview.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    CapitalizeFirstLetterPipe
+    CapitalizeFirstLetterPipe,
+    InfoviewComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [    
     ApiCaller,

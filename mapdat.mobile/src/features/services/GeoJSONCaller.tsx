@@ -11,7 +11,7 @@ class GeoJSONCaller {
         this.apiFactory = new MapDatApiCallerFactory();
         this.geoJsonUtils = new GeoJsonUtil();
     }
-    public getRequest(layer: number, optionalParam: string | undefined){
+    public getRequest(layer: number, optionalParam: string | undefined, secondOptionalParam: string | undefined){
         // console.log(optionalParam);
         switch(layer)
         {
@@ -22,7 +22,7 @@ class GeoJSONCaller {
                 return this.getPowiat(optionalParam);
             break;
             case 3:
-                return this.getGminy(optionalParam);
+                return this.getGminy(optionalParam, secondOptionalParam);
             break
         }
     }
@@ -54,12 +54,12 @@ class GeoJSONCaller {
             .then((x: any) => this.geoJsonUtils.transformGeoJsonToList(x.data))
         })
     }
-    private getGminy(powiatName: string | undefined){
+    private getGminy(powiatName: string | undefined, powiatId: string | undefined){
         return useQuery({
             queryKey: ['gminy'],
             queryFn: async () => await this.apiFactory
             .getApiImplementation(`Gminy`)
-            .getItem(`?Powiat=${powiatName}`)
+            .getItem(`?Powiat=${powiatName}&PowiatId=${powiatId}`)
             .then((x: any) => this.geoJsonUtils.transformGeoJsonToList(x.data))
         })
     }

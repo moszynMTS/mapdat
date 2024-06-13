@@ -58,14 +58,15 @@ export const Map = ({ layer, setLayer, saveGmina, saveLayer, setSaveGmina }) => 
 
   useEffect(() => {
     if (geoAreaInfo.isSuccess) {
-      console.log(geoAreaInfo.data);
+      UmapDetailContext.setData(geoAreaInfo.data);
+      UmapDetailContext.setDisplay(true);
     }
   }, [geoAreaInfo.isSuccess, geoAreaInfo.data])
 
-  if (geoJsonWoj.isLoading) {
+  if (geoJsonWoj.isLoading || geoAreaInfo.isLoading) {
     return (<>
       <ModalLoader
-        show={geoJsonWoj.isLoading}
+        show={geoJsonWoj.isLoading || geoAreaInfo.isLoading}
         message={"Ładowanie treści..."}
       />
     </>)
@@ -77,6 +78,7 @@ export const Map = ({ layer, setLayer, saveGmina, saveLayer, setSaveGmina }) => 
           <ModalInfo
             visible={UmapDetailContext.display}
             setVisible={UmapDetailContext.setDisplay}
+            areaName={params.name}
           />
         }
         <View

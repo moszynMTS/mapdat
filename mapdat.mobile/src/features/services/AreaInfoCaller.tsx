@@ -22,26 +22,32 @@ class AreaInfoCaller extends BaseApiService {
 
     private getWojewodztwa(id?: string): UseQueryResult {
         return useQuery({
-            queryKey: ['wojewodztwa'],
+            queryKey: ['Wojewodztwa', id],
             queryFn: async () => await this.apiFactory
                 .getApiImplementation("RSPO")
                 .getInfo("Wojewodztwa", id)
+                .then( (x: any) => x.data.content[0].data),
+            enabled: false
         })
     }
     private getPowiaty(id?: string): UseQueryResult {
         return useQuery({
-            queryKey: ['Powiaty'],
+            queryKey: ['Powiaty', id],
             queryFn: async () => await this.apiFactory
                 .getApiImplementation("RSPO")
                 .getInfo("Powiaty", id)
+                .then( (x: any) => x.data.content[0].data),
+            enabled: false
         })
     }
     private getGminy(id?: string): UseQueryResult {
         return useQuery({
-            queryKey: ['Gminy'],
+            queryKey: ['Gminy', id],
             queryFn: async () => await this.apiFactory
                 .getApiImplementation("RSPO")
                 .getInfo("Gminy", id)
+                .then( (x: any) => x.data.content[0].data),
+            enabled: false
         })
     }   
 }

@@ -17,7 +17,7 @@ class MapDatBaseApiCaller extends BaseApiCaller {
     return this.get(id);
   }
   getInfo(arrayName, id){
-    return this.get(`?${arrayName}=${id}${prepareSubjectsRequest()}`);
+    return this.get(`?${arrayName}=${id}${prepareSubjectsRequest()}`) ;
   }
   getPowiat(woj){
     return this.get(`?Wojewodztwo=${woj}`);

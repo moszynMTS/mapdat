@@ -9,6 +9,7 @@ import { AppNavigator } from './src/screens/AppNavigator';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { LayerProvider } from './src/states/context/LayerContext';
 import CustomAlertProvider from './src/components/layouts/CustomAlertProvider';
+import { MapDetailProvider } from './src/states/context/MapDetailContext';
 
 const queryClient = new QueryClient();
 
@@ -52,7 +53,10 @@ export default function App() {
 
         <SafeAreaProvider>
           <LayerProvider>
-            <AppNavigator onLayout={onLayoutRootView} />
+            <MapDetailProvider>
+
+              <AppNavigator onLayout={onLayoutRootView} />
+            </MapDetailProvider>
           </LayerProvider>
         </SafeAreaProvider>
       </CustomAlertProvider>

@@ -1,3 +1,4 @@
+import { prepareSubjectsRequest } from "../../utils/prepareSubjectsRequest";
 import BaseApiCaller, { API_BASE_URL } from "../api-services/BaseApiCaller";
 
 class MapDatBaseApiCaller extends BaseApiCaller {
@@ -14,6 +15,9 @@ class MapDatBaseApiCaller extends BaseApiCaller {
 
   getItem(id = "") {
     return this.get(id);
+  }
+  getInfo(arrayName, id){
+    return this.get(`?${arrayName}=${id}${prepareSubjectsRequest()}`) ;
   }
   getPowiat(woj){
     return this.get(`?Wojewodztwo=${woj}`);

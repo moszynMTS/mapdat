@@ -20,7 +20,8 @@ export function prepareGeoJSON(geo: any) {
     "type": geo.type,
     "properties": {
       "name": geo.properties.name,
-      "popupContent": geo.properties.name
+      "popupContent": geo.properties.name,
+      "id": geo.id != undefined ? geo.id : null
     },
     "geometry": {
       "type": geo.geometry.type,

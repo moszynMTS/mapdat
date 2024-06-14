@@ -18,7 +18,6 @@ class BaseApiCaller {
 
   async get(path = "", options = {}) {
     const fullPath = this.getFullPath(path);
-    console.log(fullPath)
     return axios.get(fullPath);
   }
 

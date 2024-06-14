@@ -51,6 +51,19 @@ namespace MapDat.Application.Features.RSPO.Queries
                     var item = new InfoViewModel();
                     item.PowiatId = id;
                     item.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, id, null) });
+                    if (request.Offline)
+                    {
+                        var powiat = _mongoService.GetPowiat(id);
+                        var gminyPowiatu = await _mongoService.GetGminy(powiat.Properties.Name, id) ;
+                        foreach(var gmina in gminyPowiatu)
+                        {
+                            var item2 = new InfoViewModel();
+                            item2.GminaId = id;
+                            item2.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, null, id) });
+                            item.PowiatOfflineData.Add(item2);
+                        }
+                    }
+
                     result.Add(item);
                 }
                 foreach (var id in request.Gminy)

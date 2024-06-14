@@ -10,5 +10,6 @@ namespace MapDat.Application.Features.RSPO.Queries
         public IEnumerable<string> Powiaty { get; set; } = new List<string>();
         public IEnumerable<string> Gminy { get; set; } = new List<string>();
         public IEnumerable<string> Subjects { get; set; } = new List<string>();
+        public bool Offline { get; set; } = false;
     }
 }

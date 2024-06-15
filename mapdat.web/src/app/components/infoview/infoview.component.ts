@@ -20,6 +20,12 @@ class FormatedInfo {
 export class InfoviewComponent implements OnInit {
   public info: any;
   public formatedInfo: FormatedInfo[] = [];
+  viewVBC: [number, number] = [900, 400];
+  animationsVBC = false;
+  legendVBC = false;
+  xAxisVBC = true;
+  yAxisVBC = true;
+  showYAxisLabelVBC = true;
 
   public subjects: any[] = [
     { id: 1, name: "Dochody powiatów według województwa", value: "DOCHODY" },
@@ -38,8 +44,7 @@ export class InfoviewComponent implements OnInit {
     { id: 14, name: "Szkoły według podziału administracyjnego", value: "SZKOLY" }
 ];
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
-    this.info = data
-    console.log("info", this.info)
+    this.info = data;
     this.mapResults()
    }
 
@@ -55,21 +60,20 @@ export class InfoviewComponent implements OnInit {
     this.subjects.forEach(element => {
         var topic = element.value;
         var id;
-        var values: any[] = [];
-
+        var values: any[] = []
         this.info.forEach((info: any) => {
           var data = info.data.find((x: any) => x.subject === topic);
           if (data) {
             id = info.wojewodztwoId != null ? info.wojewodztwoId :
                  info.powiatId != null ? info.powiatId :
                  info.gminaId;
-            values.push({ id, name: info.name, value: data.count });
+            let count = parseFloat(data.count.replace(',', '.'));
+            values.push({ id, name: info.name, value: count });
           }
         });
-
-        this.formatedInfo.push(new FormatedInfo(topic, values));
+        if(values.length != 0){
+          this.formatedInfo.push(new FormatedInfo(topic, values));
+        }
     });
-
-    console.log("formatedInfo", this.formatedInfo);
   }
 }

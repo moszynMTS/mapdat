@@ -18,12 +18,16 @@ export const Map = ({
 }) => {
   const [params, dispatchParamName] = useReducer(
     (state, action) => ({ ...state, ...action }),
-    { name: "", id: "" }
+    { name: "", id: "", finalName: "" }
   );
-  const geoJsonWoj = GeoJSONCaller.getRequest(layer, params.name);
+  const geoJsonWoj = GeoJSONCaller.getRequest(layer, params.name, params.id);
   const geoAreaInfo = AreaInfoCaller.getRequest(layer, params.id);
+  const gminyAreaInfo = AreaInfoCaller.getRequest("offline", params.id);
+
   const UmapDetailContext = useContext(MapDetailContext);
   const [data, setData] = useState(null);
+  const [areaInfo, setAreaInfo] = useState(null);
+  const [disableSave, setDisableSave] = useState(false);
 
   const onClickFeature = () => {
     switch (layer) {
@@ -32,15 +36,17 @@ export const Map = ({
 
         break;
       case 2:
-        setLayer((prev) => prev + 1);
+        gminyAreaInfo.refetch();
+
         break;
     }
   };
 
   useEffect(() => {
-    if (layer >= 3 && saveGmina) {
-      saveLayer(params.name, data);
+    if (layer >= 3 && saveGmina && !disableSave) {
+      saveLayer(params.finalName, data, areaInfo);
       setSaveGmina(false);
+      setDisableSave(true);
     }
   }, [saveGmina]);
 
@@ -49,6 +55,13 @@ export const Map = ({
       geoAreaInfo.refetch();
     }
   }, [params.id]);
+
+  useEffect(() => {
+    if (gminyAreaInfo.isSuccess) {
+      setAreaInfo(gminyAreaInfo.data);
+      if (layer == 2) setLayer((prev) => prev + 1);
+    }
+  }, [gminyAreaInfo.isSuccess, gminyAreaInfo.data]);
 
   useEffect(() => {
     if (geoJsonWoj.isSuccess) {
@@ -63,11 +76,19 @@ export const Map = ({
     }
   }, [geoAreaInfo.isSuccess, geoAreaInfo.data]);
 
-  if (geoJsonWoj.isLoading || geoAreaInfo.isLoading) {
+  if (
+    geoJsonWoj.isLoading ||
+    geoAreaInfo.isLoading ||
+    gminyAreaInfo.isLoading
+  ) {
     return (
       <>
         <ModalLoader
-          show={geoJsonWoj.isLoading || geoAreaInfo.isLoading}
+          show={
+            geoJsonWoj.isLoading ||
+            geoAreaInfo.isLoading ||
+            gminyAreaInfo.isLoading
+          }
           message={"Ładowanie treści..."}
         />
       </>
@@ -107,6 +128,12 @@ export const Map = ({
                 name: capitalizeFirstLetter(data.feature.properties.name),
               });
               dispatchParamName({ id: data.feature.properties.id });
+              if (layer == 2)
+                dispatchParamName({
+                  finalName: capitalizeFirstLetter(
+                    data.feature.properties.name
+                  ),
+                });
             }}
           />
         </View>

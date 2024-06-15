@@ -1,4 +1,5 @@
 import * as FileSystem from 'expo-file-system';
+import { removeElementByName } from '../../utils/removeElementByName';
 
 class OfflineDataService {
   path: string;
@@ -34,11 +35,13 @@ class OfflineDataService {
     }
   }
 
-  async saveMapData(data: string, name: string) {
+  async saveMapData(data: string, name: string, areaInfo: unknown) {
     try {
       this.saveMapName(name);
       const path = `${this.path}${name}.json`;
+      const areaInfopath = `${this.path}${name}_data.json`;
       await FileSystem.writeAsStringAsync(path, JSON.stringify(data), { encoding: 'utf8' });
+      await FileSystem.writeAsStringAsync(areaInfopath, JSON.stringify(areaInfo), { encoding: 'utf8' });
       console.debug("SAVED");
     } catch (error) {
       console.error("Error saving mapData:", error);
@@ -75,6 +78,22 @@ class OfflineDataService {
       console.error("Error loading data:", error);
     }
   }
+  async loadAreaInfoData(name: string) {
+    try {
+      const path = `${this.path}${name}_data.json`;
+      const fileExists = await FileSystem.getInfoAsync(path).then(({ exists }) => exists);
+      if (fileExists) {
+        const storedData = await FileSystem.readAsStringAsync(path, { encoding: 'utf8' });
+        if (storedData) {
+          return JSON.parse(storedData);
+        }
+      } else {
+        console.warn("File not found: " + name + ".json");
+      }
+    } catch (error) {
+      console.error("Error loading data:", error);
+    }
+  }
 
   async clearMapData(name: string) {
     try {
@@ -95,6 +114,15 @@ class OfflineDataService {
       console.error("Błąd podczas usuwania folderu:", error);
     }
   }
+  private async deleteAreaInfoData(name: string){
+    const folderPath = `${this.path}${name}_data.json`;
+    try {
+      await FileSystem.deleteAsync(folderPath);
+      console.log("Folder został pomyślnie usunięty.");
+    } catch (error) {
+      console.error("Błąd podczas usuwania folderu:", error);
+    }
+  }
 
   async deleteMap(name:string){
     try {
@@ -102,9 +130,10 @@ class OfflineDataService {
       console.log(path)
       const storedData = await FileSystem.readAsStringAsync(path, { encoding: 'utf8' });
       const parsedData = JSON.parse(storedData);
-      parsedData.layersName.pop(name);
+      parsedData.layersName = removeElementByName(parsedData.layersName, name);
       await FileSystem.writeAsStringAsync(path, JSON.stringify(parsedData), { encoding: 'utf8' });
-      // await this.deleteMapData(name);
+      await this.deleteMapData(name);
+      await this.deleteAreaInfoData(name);
     } catch (error) {
       console.error("Error deleting mapData:", error);
     }

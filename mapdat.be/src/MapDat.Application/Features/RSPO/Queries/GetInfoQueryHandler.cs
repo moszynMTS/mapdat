@@ -58,8 +58,8 @@ namespace MapDat.Application.Features.RSPO.Queries
                         foreach(var gmina in gminyPowiatu)
                         {
                             var item2 = new InfoViewModel();
-                            item2.GminaId = id;
-                            item2.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, null, id) });
+                            item2.GminaId = gmina.Id;
+                            item2.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, null, gmina.Id) });
                             item.PowiatOfflineData.Add(item2);
                         }
                     }

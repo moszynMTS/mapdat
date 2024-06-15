@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { FlatList, Modal, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import { MapDetailContext } from "../../states/context/MapDetailContext";
 import { preparPostScriptToText } from "../../utils/preparPostScriptToText";
@@ -15,7 +15,7 @@ type TModalInfo = {
 };
 
 export const ModalInfo: React.FC<TModalInfo> = ({ visible, setVisible, areaName, setAccept, disableSave }) => {
-    const UMapData = useContext(MapDetailContext);
+    const UMapData = useContext(MapDetailContext);    
 
     const renderItem = ({ item }: { item: any }) => {
         return (
@@ -67,7 +67,7 @@ export const ModalInfo: React.FC<TModalInfo> = ({ visible, setVisible, areaName,
                                 setVisible(false);
                             }}>
                                 <Text style={styles.buttonText}>
-                                    Zapisz
+                                    Przejdź
                                 </Text>
                             </TouchableOpacity>
                         </View>

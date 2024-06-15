@@ -27,6 +27,7 @@ namespace MapDat.Application.Features.RSPO.Queries
                 var info = _mongoService.GetInfo(id);
                 var item = new InfoViewModel();
                 item.WojewodztwoId = id;
+                item.Name = _mongoService.GetWojewodztwo(id).Properties.Name;
                 foreach (var subject in request.Subjects)
                 {
                     string formattedSubject = char.ToUpper(subject[0]) + subject.Substring(1).ToLower();
@@ -50,6 +51,7 @@ namespace MapDat.Application.Features.RSPO.Queries
                 {
                     var item = new InfoViewModel();
                     item.PowiatId = id;
+                    item.Name = _mongoService.GetPowiat(id).Properties.Name;
                     item.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, id, null) });
                     if (request.Offline)
                     {
@@ -59,6 +61,7 @@ namespace MapDat.Application.Features.RSPO.Queries
                         {
                             var item2 = new InfoViewModel();
                             item2.GminaId = gmina.Id;
+                            item2.Name = _mongoService.GetGmina(gmina.Id).Properties.Name;
                             item2.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, null, gmina.Id) });
                             item.PowiatOfflineData.Add(item2);
                         }
@@ -70,6 +73,7 @@ namespace MapDat.Application.Features.RSPO.Queries
                 {
                     var item = new InfoViewModel();
                     item.GminaId = id;
+                    item.Name = _mongoService.GetGmina(id).Properties.Name;
                     item.Data.Add(new DataModel { Subject = "SZKOLY", Count = await GetSchoolData(null, null, id) });
                     result.Add(item);
                 }

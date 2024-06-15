@@ -15,6 +15,7 @@ namespace MapDat.Application.Models.RSPO
         public string? WojewodztwoId { get; set; }
         public string? PowiatId { get; set; }
         public string? GminaId { get; set; }
+        public string Name { get; set; }
         public List<DataModel> Data { get; set; } = new List<DataModel>();
         public List<InfoViewModel> PowiatOfflineData { get; set; } = new List<InfoViewModel>();
         

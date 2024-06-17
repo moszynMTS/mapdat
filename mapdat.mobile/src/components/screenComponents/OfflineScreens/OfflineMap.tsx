@@ -32,15 +32,24 @@ export const OfflineMap: React.FC<OfflineMapProps> = ({
   }, [geoJsonWoj.isSuccess, geoJsonWoj.data]);
   useEffect(() => {
     if (geoAreaInfo.isSuccess)
-      setAreaInfo(geoAreaInfo.data.content[0].powiatOfflineData);
+      {
+        setAreaInfo(geoAreaInfo.data.content[0].powiatOfflineData);
+      }
   }, [geoAreaInfo.isSuccess, geoAreaInfo.data]);
   useEffect(() => {
     if (params.id.length != 0) {
         let data: any;
+        console.log(areaInfo);
         if(areaInfo != undefined)
+        {
             data = areaInfo.filter( (element) => element.gminaId == params.id)
-        UmapDetailContext?.setData(data[0].data);
-        UmapDetailContext?.setDisplay(true);
+          if(data != undefined)
+          {
+            console.log(data[0].data);
+            UmapDetailContext?.setData(data[0].data);
+            UmapDetailContext?.setDisplay(true);
+          }
+        }
     }
   }, [params.id]);
 
@@ -85,10 +94,11 @@ export const OfflineMap: React.FC<OfflineMapProps> = ({
             javaScriptEnabled
             onMessage={(event) => {
                 const data = JSON.parse(event.nativeEvent.data);
-                dispatchParamName({
-                    name: capitalizeFirstLetter(data.feature.properties.name),
-                  });
-                  dispatchParamName({ id: data.feature.properties.id });
+                console.log(data.feature.properties.name);
+              dispatchParamName({
+                name: capitalizeFirstLetter(data.feature.properties.name),
+              });
+              dispatchParamName({ id: data.feature.properties.id });
             }}
           />
         </View>

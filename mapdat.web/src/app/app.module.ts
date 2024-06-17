@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InfoviewComponent } from './components/infoview/infoview.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     FormsModule,
     MatSelectModule,
     MatDialogModule,
-    MatExpansionModule
+    MatExpansionModule,
+    NgxChartsModule,
   ],
   providers: [    
     ApiCaller,

@@ -199,15 +199,15 @@ export class MapComponent implements AfterViewInit {
     if (feature.properties && feature.properties.name) {
       switch(layers){
         case 1:
-          console.log("[P] ",feature.properties.name)
+          //console.log("[P] ",feature.properties.name)
           this.getPowiaty(feature.properties.name);
           break;
           case 2:
-            console.log("[G] ",feature.properties.name)
+            //console.log("[G] ",feature.properties.name)
             this.getGminy(feature.properties.name, feature.properties.id)
             break;
           case 3:
-            console.log("[A] ",feature.properties.name, feature.properties.id)
+            //console.log("[A] ",feature.properties.name, feature.properties.id)
           break;
       }
     }
@@ -345,6 +345,8 @@ export class MapComponent implements AfterViewInit {
   }
 
   checkResult(){
+    if(this.selectedSubjectNames.length == 0) return;
+    if(this.wojewodztwaList.length == 0 && this.powiatyList.length == 0 && this.gminyList.length == 0) return
     this.apiCaller.setControllerPath('RSPO');
     let sending: string[][] = [
       this.wojewodztwaList.map(x=>x.id),
@@ -355,7 +357,7 @@ export class MapComponent implements AfterViewInit {
     this.apiCaller.getInfo(sending).subscribe((res: any) => {
         this.dialog.open(InfoviewComponent, {
           data: res?.content,
-          width: '600px'
+          width: '1000px'
         });
     })
   }

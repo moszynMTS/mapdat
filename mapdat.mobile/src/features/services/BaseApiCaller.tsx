@@ -10,12 +10,12 @@ export type TQueryMethodFunction<T = any> = (params?: TOptionalParams) => UseQue
 
 export class BaseApiService{
     private methodMutationMap: { [key: number] : TMutationMethodFunction} = {};
-    private methodQueryMap: { [key: number] : TQueryMethodFunction} = {};
+    private methodQueryMap: { [key: number | string] : TQueryMethodFunction} = {};
 
     protected registerMutationMethod<T = any>(layer: number, method: TMutationMethodFunction<T>): void{
         this.methodMutationMap[layer] = method;
     }
-    protected registerQueryMethod<T = any>(layer: number, method: TQueryMethodFunction<T>): void{
+    protected registerQueryMethod<T = any>(layer: number | string, method: TQueryMethodFunction<T>): void{
         this.methodQueryMap[layer] = method;
     }
 
@@ -25,7 +25,7 @@ export class BaseApiService{
             throw new Error(`No method mapped for layer ${layer}`);
         return method(params);
     }
-    protected callQueryMethod<T = any>(layer: number, params?: TOptionalParams){
+    protected callQueryMethod<T = any>(layer: number | string, params?: TOptionalParams){
         const method = this.methodQueryMap[layer] as TQueryMethodFunction<T>;
         if(!method)
             throw new Error(`No method mapped for layer ${layer}`);

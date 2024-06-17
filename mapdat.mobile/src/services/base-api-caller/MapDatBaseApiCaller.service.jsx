@@ -16,8 +16,9 @@ class MapDatBaseApiCaller extends BaseApiCaller {
   getItem(id = "") {
     return this.get(id);
   }
-  getInfo(arrayName, id){
-    return this.get(`?${arrayName}=${id}${prepareSubjectsRequest()}`) ;
+  getInfo(arrayName, id, offline = false){
+    console.log(offline);
+    return this.get(`?${arrayName}=${id}${prepareSubjectsRequest()}&Offline=${offline}`) ;
   }
   getPowiat(woj){
     return this.get(`?Wojewodztwo=${woj}`);

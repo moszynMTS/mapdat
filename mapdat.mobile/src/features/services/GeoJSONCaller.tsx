@@ -30,6 +30,10 @@ class GeoJSONCaller {
     {
         return this.getOfflineMapData(name);
     }
+    public getMapAreaInfo(name:string)
+    {
+        return this.getOfflineAreaInfo(name);
+    }
     public getListOfflineMap()
     {
         return this.getOfflineData();
@@ -41,7 +45,7 @@ class GeoJSONCaller {
             queryFn: async () => await this.apiFactory
                 .getApiImplementation("Wojewodztwa")
                 .getItem()
-                .then((x: any) => this.geoJsonUtils.transformGeoJsonToList(x.data))
+                .then((x: any) => this.geoJsonUtils.transformGeoJsonToList(x.data)),
         })
     }
     private getPowiat(wojewodztwoName: string | undefined)
@@ -70,6 +74,14 @@ class GeoJSONCaller {
             queryFn: async () => await OfflineDataService.listJsonFiles(),
             refetchOnWindowFocus: true,
             enabled: false
+        })
+    }
+    private getOfflineAreaInfo(name: string)
+    {
+        return useQuery({
+            queryKey: ['offline_area_info'],
+            queryFn: async () => await OfflineDataService.loadAreaInfoData(name),
+            refetchOnWindowFocus: true,
         })
     }
     private getOfflineMapData(name: string)
